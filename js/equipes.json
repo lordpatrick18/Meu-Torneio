@@ -1,0 +1,29 @@
+
+  [
+    { "nome": "Arsenal", "pais": "ENG" },
+    { "nome": "Chelsea", "pais": "ENG" },
+    { "nome": "Liverpool", "pais": "ENG" },
+    { "nome": "Manchester City", "pais": "ENG" },
+    { "nome": "Manchester United", "pais": "ENG" },
+  
+ 
+    { "nome": "Atalanta", "pais": "ITA" },
+    { "nome": "Inter De Milão", "pais": "ITA" },
+    { "nome": "Juventus", "pais": "ITA" },
+    { "nome": "Milan", "pais": "ITA" },
+    { "nome": "Paris Saint-Germain", "pais": "FRA" },
+  
+
+    { "nome": "Atlético De Madrid", "pais": "ESP" },
+    { "nome": "Barcelona", "pais": "ESP" },
+    { "nome": "Real Madrid", "pais": "ESP" },
+    { "nome": "Benfica", "pais": "POR" },
+    { "nome": "Porto", "pais": "POR" },
+ 
+    { "nome": "Bayern De Munique", "pais": "GER" },
+    { "nome": "Bayer Leverkusen", "pais": "GER" },
+    { "nome": "Borussia Dortmund", "pais": "GER" },
+    { "nome": "Ajax", "pais": "NED" },
+    { "nome": "Sporting", "pais": "POR" }
+  ]
+

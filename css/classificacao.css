@@ -1,0 +1,564 @@
+/* === ESTILO UNIFICADO CLASSIFICACAO.CSS === */
+
+.menu-classificacao-superior {
+  display: flex;
+  background: #4151b9;
+  border-radius: 10px;
+  padding: 2px;
+  width: fit-content;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.botoes-classificacao button {
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.botoes-classificacao button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.botoes-classificacao button.active {
+  background: #0a0a61;
+  font-weight: bold;
+}
+
+/* Estrutura da Tabela em Grid */
+.linha-cards.header,
+.classificacao-grid .linha-cards {
+  display: grid;
+  grid-template-columns: 400px 50px 50px 50px 50px 50px 50px 50px 50px 60px 300px;
+  align-items: stretch;
+  gap: 5px;
+  width: 100%;
+  min-width: 1000px;
+  box-sizing: border-box;
+}
+
+#classificacao.tela {
+  padding-left: 75px;
+  padding-right: 75px;
+  box-sizing: border-box;
+}
+
+.linha-cards {
+  padding: 0;
+  border-radius: 10px;
+  min-height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+/* Cabeçalho da Tabela */
+/* ucl atlzd26.06part2/css/classificacao.css */
+
+/* ... (código anterior) ... */
+
+/* Cabeçalho da Tabela */
+/* Cabeçalho da Tabela */
+.card-info-header {
+  background: #04287a;
+  color: white;
+  font-weight: bold;
+  /* ALTERAÇÃO: Unifica o tamanho da fonte para todos os cards */
+  font-size: 20px;
+  /* ADIÇÃO: Transforma todo o texto em maiúsculas para consistência */
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+/* Garante que o container do cabeçalho da equipe também respeite a altura */
+.equipe-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-left: 170px;
+  padding-right: 20px;
+  background: #04287a;
+  border-radius: 6px;
+  height: 100%; /* Faz com que ocupe a altura definida no .card-info-header */
+}
+
+
+/* Cabeçalho - Container de posição e variação */
+/* Container principal do cabeçalho POS + VAR */
+.cabecalho-pos-var {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 110px; /* Mesma largura do posicao-interno nas linhas */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Estilo para POS no cabeçalho */
+.equipe-cabecalho .posicao-interno {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    background: #04287a;
+    border-radius: 6px 0 0 6px;
+}
+
+/* Estilo para VAR no cabeçalho */
+.equipe-cabecalho .variacao-interno {
+    display: flex !important;
+    width: 35%;
+    height: 100%;
+    background: #04287a;
+    border-radius: 0 6px 6px 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+   
+}
+
+
+.nome-equipe-classificacao {
+  font-weight: bold;
+  /* ALTERAÇÃO: Garante que o texto 'EQUIPE' tenha o mesmo tamanho */
+  font-size: 20px;
+  color: white;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ... (restante do código) ... */
+/* Células da Tabela (Estilo Padrão) */
+.card-info {
+  color: white !important;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 10px;
+}
+
+.card-info:not(.equipe) {
+    background: #2a2e65;
+}
+
+/* Card da Equipe - Container principal */
+.card-info.equipe {
+    position: relative; /* <-- GARANTA QUE ESTA LINHA EXISTA */
+    justify-content: flex-start;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+    transform: none;
+}
+
+.card-info.equipe::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: -6px;
+  width: 15%;
+  height: 100%;
+  background: #008cff;
+  border-radius: 10px;
+  transform: rotate(-12deg);
+  z-index: -2;
+}
+
+.card-info.equipe::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2a2e65;
+  border-radius: 10px;
+  transform: rotate(0deg);
+  z-index: -1;
+}
+
+/* ================================================= */
+/* ========= INÍCIO DA CORREÇÃO DEFINITIVA ========= */
+/* ================================================= */
+
+/* Card de Posição: AGORA É O CONTAINER DE REFERÊNCIA */
+/* Card de Posição: AGORA É O CONTAINER DE REFERÊNCIA */
+/* Card de Posição: Regra Final Corrigida */
+/* Card de Posição: Regra Final Corrigida */
+
+
+/* Card de Variação: AGORA POSICIONADO NO CANTO SUPERIOR DIREITO */
+/* Card de Posição: Container principal */
+.posicao-interno {
+    position: relative; 
+    width: 110px;
+    height: 60px; /* Altura fixa para alinhar com a linha */
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 2;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    color: white;
+    text-align: center;
+    line-height: 60px; /* Centraliza o número verticalmente */
+    font-size: 2rem;
+}
+
+/* Card de Variação: Posicionado no canto superior direito */
+
+
+/* Ajuste do número da posição para não interferir com a variação */
+.posicao-numero {
+    width: 35%;
+    height: 100%;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ajuste do pseudo-elemento de fundo */
+.posicao-interno::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #04287a;
+    border-radius: 6px;
+    z-index: -1;
+}
+
+/* Remover o .variacao-interno já que não será mais necessário */
+.variacao-interno {
+    display: none;
+}
+
+
+
+
+/* Card de Variação: Posicionado em relação ao pai (.posicao-interno) */
+
+
+/* =============================================== */
+/* ========= FIM DA CORREÇÃO DEFINITIVA ========= */
+/* =============================================== */
+
+
+.card-variacao {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 50%;  /* Aumentado de 22px para 28px */
+    height: 100%; /* Aumentado de 22px para 28px */
+    border-radius: 5px; /* Bordas mais arredondadas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Sombra mais pronunciada */
+}
+
+/* Ajuste no texto da variação */
+.card-variacao::before {
+    content: attr(data-variacao);
+    position: absolute;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 2rem; /* Aumentado de 0.8rem para 1rem */
+    color: white; /* Texto sempre branco para melhor contraste */
+}
+
+
+.card-variacao.subiu {
+    background: linear-gradient(45deg, #2a2e65 50%, #27ae60 50.5%);
+    border-bottom: 2px solid #27ae60;
+    border-left: 2px solid #27ae60;
+}
+.card-variacao.subiu::before {
+    color: #27ae60;
+    top: 65%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.card-variacao.desceu {
+    background: linear-gradient(45deg, #c0392b 50%, #2a2e65 50.5%);
+    border-top: 2px solid #c0392b;
+    border-right: 2px solid #c0392b;
+}
+.card-variacao.desceu::before {
+    color: #c0392b;
+    top: 35%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.card-variacao.manteve {
+    background: #f1c40f;
+
+}
+
+
+.card-variacao.manteve::before {
+    color: #2a2e65;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.equipe-main-content {
+    display: flex;
+    align-items: center;
+    padding-left: 0; /* O espaçamento agora vem do .posicao-interno */
+    padding-right: 20px;
+    width: 100%;
+}
+
+.equipe-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px; /* Adiciona um espaço entre o card de posição e o escudo */
+}
+
+.card-info.equipe .escudo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.equipe-info-bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.2;
+    overflow: visible;
+}
+
+
+
+.pais-equipe-classificacao {
+    font-size: 11px;
+    color: white;
+    background-color: #3b82f6;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+/* Container dos cards de últimos resultados com espaçamento uniforme */
+/* Container dos últimos jogos */
+/* Container dos últimos jogos - mantendo o fundo azul original */
+.card-info.ultimos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinha da esquerda para direita */
+  padding: 0 2px; /* Reduz o padding vertical para ganhar espaço */
+  gap: 4px;
+  height: 60px; /* Altura fixa (igual ao card azul de fundo) */
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Aumentar apenas os cards de resultados (sem afetar o fundo) */
+.resultado-card {
+  width: 45px;  /* Aumento de 24px para 30px */
+  height: 45px; /* Aumento de 24px para 30px */
+  min-width: 30px; /* Impede redução */
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px; /* Aumento de 14px para 16px */
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transform: scale(1);
+  transition: transform 0.2s;
+  flex-shrink: 0; /* Mantém o tamanho fixo */
+}
+
+/* Efeito hover opcional para melhor interação */
+.resultado-card:hover {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+/* Cores específicas */
+.resultado-card.vitoria {
+  background-color: #27ae60;
+}
+
+.resultado-card.empate {
+  background-color: #f1c40f;
+}
+
+.resultado-card.derrota {
+  background-color: #c0392b;
+}
+
+/* Animações para o último resultado */
+.resultado-card.ultimo-resultado {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.resultado-card.ultimo-resultado.vitoria {
+  animation-name: pulse-green;
+}
+
+.resultado-card.ultimo-resultado.empate {
+  animation-name: pulse-yellow;
+}
+
+.resultado-card.ultimo-resultado.derrota {
+  animation-name: pulse-red;
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-red {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-yellow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+
+/* =============================================== */
+/* === NOVAS REGRAS DE COR - ADICIONAR AO CSS === */
+/* =============================================== */
+
+/* --- Cores Base (já existentes) --- */
+.linha-cards.posicao-1-a-4 .card-info.equipe::before { background-color: #a9fa00 !important; }
+.linha-cards.posicao-5-a-8 .card-info.equipe::before { background-color: #03bff9 !important; }
+.linha-cards.posicao-9-a-12 .card-info.equipe::before { background-color: #ffa500 !important; }
+.linha-cards.posicao-13-a-16 .card-info.equipe::before { background-color: #C8A2C8 !important; }
+.linha-cards.rebaixado .card-info.equipe::before { background-color: #e74c3c !important; }
+
+/* --- Segunda Fase --- */
+.linha-cards.posicao-1-a-3 .card-info.equipe::before { background-color: #a9fa00 !important; } /* Verde */
+.linha-cards.posicao-4-a-6 .card-info.equipe::before { background-color: #03bff9 !important; } /* Azul */
+.linha-cards.posicao-7-a-9 .card-info.equipe::before { background-color: #ffa500 !important; } /* Laranja */
+.linha-cards.posicao-10-a-12 .card-info.equipe::before { background-color: #C8A2C8 !important; } /* Lilás */
+
+/* --- Terceira Fase --- */
+.linha-cards.posicao-1-a-2 .card-info.equipe::before { background-color: #a9fa00 !important; } /* Verde */
+.linha-cards.posicao-3-a-4 .card-info.equipe::before { background-color: #03bff9 !important; } /* Azul */
+.linha-cards.posicao-5-a-6 .card-info.equipe::before { background-color: #ffa500 !important; } /* Laranja */
+.linha-cards.posicao-7-a-8 .card-info.equipe::before { background-color: #C8A2C8 !important; } /* Lilás */
+
+/* --- Quarta Fase --- */
+.linha-cards.posicao-1-a-1 .card-info.equipe::before { background-color: #a9fa00 !important; } /* Verde */
+.linha-cards.posicao-2-a-2 .card-info.equipe::before { background-color: #03bff9 !important; } /* Azul */
+.linha-cards.posicao-3-a-3 .card-info.equipe::before { background-color: #ffa500 !important; } /* Laranja */
+.linha-cards.posicao-4-a-4 .card-info.equipe::before { background-color: #C8A2C8 !important; } /* Lilás */
+
+/* --- Fase Final (Medalhas) --- */
+.linha-cards.posicao-ouro .card-info.equipe::before { background-color: #FFD700 !important; }
+.linha-cards.posicao-prata .card-info.equipe::before { background-color: #C0C0C0 !important; }
+.linha-cards.posicao-bronze .card-info.equipe::before { background-color: #CD7F32 !important; }
+.linha-cards.posicao-latao .card-info.equipe::before { background-color: #b08d57 !important; }
+/* Cores de Zona na Tabela */
+.linha-cards.posicao-13-a-16 .card-info.equipe::before { background-color: #C8A2C8 !important; }
+.linha-cards.posicao-9-a-12 .card-info.equipe::before { background-color: #ffa500 !important; }
+.linha-cards.posicao-5-a-8 .card-info.equipe::before { background-color: #03bff9 !important; }
+.linha-cards.posicao-1-a-4 .card-info.equipe::before { background-color: #a9fa00 !important; }
+.linha-cards.rebaixado .card-info.equipe::before { background-color: #e74c3c !important; }
+
+/* Cabeçalho */
+
+
+
+
+.equipe-cabecalho .variacao-interno {
+    display: none;
+}
+
+.equipe-cabecalho .nome-equipe-classificacao {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.equipe-cabecalho .posicao-interno::before {
+  display: none !important;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+  .classificacao-grid, .linha-cards, .linha-cards.header {
+    min-width: 100%;
+    grid-template-columns: 1fr 50px 120px;
+    gap: 3px;
+  }
+  .card-info-header:nth-child(n+3):not(:last-child),
+  .card-info:nth-child(n+3):not(:last-child) {
+    display: none;
+  }
+  .equipe-main-content {
+      padding-left: 50px;
+      padding-right: 20px;
+  }
+}

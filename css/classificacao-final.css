@@ -1,0 +1,330 @@
+/* === ESTILO UNIFICADO CLASSIFICACAO.CSS === */
+
+.menu-classificacao-superior {
+  display: flex;
+  background: #4151b9;
+  border-radius: 10px;
+  padding: 2px;
+  width: fit-content;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.botoes-classificacao button {
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.botoes-classificacao button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.botoes-classificacao button.active {
+  background: #0a0a61;
+  font-weight: bold;
+}
+
+/* Estrutura da Tabela em Grid */
+/* Código modificado com largura fixa */
+.linha-cards.header,
+.classificacao-grid .linha-cards {
+  display: grid;
+  grid-template-columns: 250px 50px 50px 50px 50px 50px 50px 50px 50px 60px 160px; /* Alterado aqui */
+  align-items: stretch; 
+  gap: 5px;
+  width: 100%;
+  min-width: 1000px;
+  box-sizing: border-box;
+}
+
+/* Adiciona margem lateral à tela de classificação para um melhor visual */
+#classificacao.tela {
+  padding-left: 200px;
+  padding-right: 200px;
+  box-sizing: border-box; /* Garante que o padding não expanda a tela */
+}
+
+.linha-cards {
+  padding: 0;
+  border-radius: 10px;
+  min-height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+/* Cabeçalho da Tabela */
+.card-info-header {
+  background: #0232fe;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+/* Células da Tabela (Estilo Padrão) */
+.card-info {
+  background: #010560;
+  color: white !important;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 10px;
+}
+
+/* Garante que o card da equipe não corte a sombra do card de posição */
+.card-info.equipe {
+    position: relative;
+    justify-content: flex-start;
+    padding: 0;
+    border-radius: 10px; 
+  
+    overflow: visible; /* Essencial para o efeito ser visível */
+}
+
+/* --- CORREÇÃO DE ALTURA E POSIÇÃO --- */
+/* Esta é a regra corrigida que garante a altura correta */
+/* Código modificado */
+.posicao-interno {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    bottom: 0;
+    width: 45px; /* Adicionado para definir a largura */
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    z-index: 2;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Recria o fundo original (azul escuro) usando ::before. */
+.posicao-interno::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0232fe;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: -1; /* Atrás do texto */
+}
+
+/* Cria a "cópia" azul claro rotacionada usando ::after. */
+.posicao-interno::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  transform: rotate(8deg);
+  z-index: -2;
+  opacity: 0.8;
+  background-color: #008cff; /* cor base que imita a sombra */
+}
+
+
+/* Efeito de hover para a cópia */
+.posicao-interno:hover::after {
+  transform: rotate(5deg) scale(1.03);
+}
+
+/* --- FIM DAS CORREÇÕES --- */
+
+.variacao-interno {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    background-color: #0232fe;
+    border-radius: 6px;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+/* Código modificado */
+.equipe-main-content {
+    display: flex;
+    align-items: center;
+    padding-left: 50px; /* Reduzido de 65px para mover o conteúdo para a esquerda */
+    padding-right: 60px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.equipe-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.var-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.triangulos-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  line-height: 0;
+}
+
+.triangulos-stack .triangulo {
+  width: 7px;
+  height: 7px;
+  display: block;
+}
+
+.variacao-numero {
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.card-info.equipe .escudo-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.equipe-info-bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.2;
+    overflow: visible;
+}
+
+.nome-equipe-classificacao {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pais-equipe-classificacao {
+    font-size: 11px;
+    color: white;
+    background-color: #3b82f6;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.ultimos-jogos-interno {
+    display: none;
+}
+
+.card-info.ultimos {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.bolinha-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.linha-cards.rebaixado .card-info.equipe {
+  background-color: red !important;
+  color: white !important;
+  border-left-color: white !important;
+}
+
+@media (max-width: 768px) {
+  .classificacao-grid, .linha-cards, .linha-cards.header {
+    min-width: 100%;
+    grid-template-columns: 1fr 50px 120px;
+    gap: 3px;
+  }
+  
+  .card-info-header:nth-child(n+3):not(:last-child), 
+  .card-info:nth-child(n+3):not(:last-child) {
+    display: none;
+  }
+  
+  .equipe-main-content {
+      padding-left: 50px;
+      padding-right: 50px;
+  }
+  .posicao-interno {
+      left: 5px;
+      padding: 0 8px;
+  }
+  .variacao-interno {
+      right: 5px;
+  }
+}
+
+
+/* === CAMADA DE CÓPIA ATRÁS DO CARD DA EQUIPE === */
+.card-info.equipe::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  width: 45px;
+  height: 100%;
+  background-color: #008cff;
+  border-radius: 6px;
+  transform: rotate(6deg);
+  z-index: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Garante ordem correta de sobreposição */
+.card-info.equipe {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.equipe-main-content {
+  position: relative;
+  z-index: 3;
+}
+
+.posicao-interno {
+  z-index: 2;
+}

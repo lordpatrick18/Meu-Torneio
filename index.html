@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>UEFA Champions League</title>
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/potes.css">
+  <link rel="stylesheet" href="css/sorteio.css">
+  <link rel="stylesheet" href="css/jogos.css">
+  <link rel="stylesheet" href="css/favorita.css">
+  <link rel="stylesheet" href="css/classificacao.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="header-top">
+    <div class="logo-text" id="tournament-title-container">
+      <span id="tournament-title">UEFA.com</span>
+      <i class="fas fa-chevron-down dropdown-icon" onclick="toggleTournamentMenu(event)"></i>
+      <ul id="tournament-menu" class="hidden">
+        <li onclick="openNewTournamentModal()">Criar Novo Torneio</li>
+        <li onclick="abrirListaTorneiosSalvos()">Carregar Torneio</li>
+        <li onclick="salvarDadosTorneio()">Salvar Torneio</li>
+      </ul>
+    </div>
+    <div id="login-container" class="login"></div>
+</div>
+
+<nav>
+    <div class="left-nav">
+        <div class="champions-logo">
+            <img src="images/logotype_dark.svg" alt="UEFA Champions League" />
+        </div>
+        <div class="menu-items">
+            <a href="#" onclick="mostrar('potes')">Potes</a>
+            <a href="#" onclick="mostrar('sorteio')">Grupos e Sorteio</a>
+            <a href="#" onclick="mostrar('jogos')">Jogos</a>
+            <a href="#" onclick="mostrar('classificacao')">Classificação</a>
+        </div>
+    </div>
+    <div class="favorite-button" onclick="abrirSelecaoFavorita()">
+        Equipa Favorita <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="nav-controls-wrapper">
+        <div class="nav-row">
+            <div class="botoes-sorteio menu-sorteio-superior hidden">
+                <button onclick="sortearGruposPorPotes()">Sortear Primeira Fase</button>
+                <button onclick="gerarSegundaFaseSorteio()">Gerar Segunda Fase</button>
+                <button onclick="gerarTerceiraFaseSorteio()">Gerar Terceira Fase</button>
+                <button onclick="gerarQuartaFaseSorteio()">Gerar Quarta Fase</button>
+                <button onclick="gerarFaseFinalSorteio()">Gerar Fase Final</button>
+            </div>
+            <div class="filtro-fase-container hidden">
+                <button class="filtro-fase-btn" onclick="alternarFiltroFases(event)">
+                    <span id="fase-selecionada">Primeira Fase</span>
+                    <img id="icone-fase-selecionada" src="images/filtros.png" alt="Ícone da Fase" class="icone-fase-selecionada">
+                </button>
+                <ul class="filtro-fase-lista hidden">
+                    <li class="filtro-item active" onclick="filtrarSorteioPorFase('primeiraFase', this)">Primeira Fase</li>
+                    <li class="filtro-item" onclick="filtrarSorteioPorFase('segundaFase', this)">Segunda Fase</li>
+                    <li class="filtro-item" onclick="filtrarSorteioPorFase('terceiraFase', this)">Terceira Fase</li>
+                    <li class="filtro-item" onclick="filtrarSorteioPorFase('quartaFase', this)">Quarta Fase</li>
+                    <li class="filtro-item" onclick="filtrarSorteioPorFase('final', this)">Fase Final</li>
+                </ul>
+            </div>
+        </div>
+        <div id="botoes-potes-container" class="botoes-sorteio hidden botoes-potes">
+            <button onclick="selecionarPoteParaVisualizacao(1)">Pote 1</button>
+            <button onclick="selecionarPoteParaVisualizacao(2)">Pote 2</button>
+            <button onclick="selecionarPoteParaVisualizacao(3)">Pote 3</button>
+            <button onclick="selecionarPoteParaVisualizacao(4)">Pote 4</button>
+        </div>
+
+        <div class="botoes-classificacao menu-classificacao-superior hidden">
+            <button onclick="filtrarClassificacao('geral')">Primeira Fase</button>
+            <button onclick="filtrarClassificacao('segundaFase')">Segunda Fase</button>
+            <button onclick="filtrarClassificacao('terceiraFase')">Terceira Fase</button>
+            <button onclick="filtrarClassificacao('quartaFase')">Quarta Fase</button>
+            <button onclick="filtrarClassificacao('final')">Fase Final</button>
+        </div>
+        <div class="botoes-jogos menu-jogos-superior hidden">
+            <div class="fase-botoes-jogos">
+                <button onclick="filtrarJogos('grupo')">Primeira Fase</button>
+                <button onclick="filtrarJogos('segundaFase')">Segunda Fase</button>
+                <button onclick="filtrarJogos('terceiraFase')">Terceira Fase</button>
+                <button onclick="filtrarJogos('quartaFase')">Quarta Fase</button>
+                <button onclick="filtrarJogos('final')">Fase Final</button>
+            </div>
+            <div class="rodadas-container">
+                <div class="rodadas-scroll">
+                    <div class="rodada-btn selecionada">Rodada 1</div>
+                    <div class="rodada-btn">Rodada 2</div>
+                    <div class="rodada-btn">Rodada 3</div>
+                    <div class="rodada-btn">Rodada 4</div>
+                    <div class="rodada-btn">Rodada 5</div>
+                    <div class="rodada-btn">Rodada 6</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="potes" class="tela">
+    <div id="cabecalho-compartilhar"></div>
+    <div class="botoes-tela-potes">
+        <button id="botao-preencher-potes" onclick="preencherPotesAleatoriamente()">
+            <i class="fas fa-random"></i> Preencher Potes
+        </button>
+        <button id="botao-compartilhar-potes">
+            <i class="fas fa-share-alt"></i> Compartilhar Imagem
+        </button>
+    </div>
+    <div class="potes-container">
+        </div>
+</div>
+
+<div id="sorteio" class="tela hidden">
+    <div id="grupos"></div>
+</div>
+
+<div id="classificacao" class="tela hidden">
+    <div id="tabelaClassificacao"></div>
+</div>
+
+<div id="jogos" class="tela hidden">
+  <div class="botoes-controle-placar">
+    <button id="btn-preencher-placares" onclick="preencherPlacaresRodadaAtual()">
+      <i class="fas fa-dice"></i> Preencher Placar Aleatório (Rodada Atual)
+    </button>
+  </div>
+  <div id="filtrosRodadas" class="fase-filtros-jogos"></div>
+  <div id="jogosRodadas"></div>
+</div>
+
+<div id="modal-cadastro" class="modal" style="display: none;">
+  <div class="modal-conteudo">
+    
+    <div class="modal-header-card">
+      <h2 id="modal-titulo-equipe">Adicionar Equipe</h2>
+      <button class="fechar-modal" onclick="fecharModalCadastro()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <input type="hidden" id="poteSelecionado">
+
+    <div class="abas-modal">
+      <button onclick="mostrarAbaEquipe('nova')">Cadastrar Nova</button>
+      <button onclick="mostrarAbaEquipe('existente')">Selecionar Existente</button>
+    </div>
+
+    <div id="aba-nova-equipe" class="aba-conteudo">
+<form id="form-cadastro-equipe">
+
+  <div class="form-column">
+    <div>
+      <label>Nome da equipe:</label>
+      <input type="text" id="nomeEquipe" required>
+    </div>
+    <div>
+      <label>País (sigla 3 letras):</label>
+      <input type="text" id="paisEquipe" maxlength="3" required>
+    </div>
+    <div class="cores-picker-container">
+      <div class="cor-picker">
+        <label for="corPrimaria">Cor Primária</label>
+        <input type="color" id="corPrimaria" value="#004170">
+      </div>
+      <div class="cor-picker">
+        <label for="corSecundaria">Cor Secundária</label>
+        <input type="color" id="corSecundaria" value="#DA291C">
+      </div>
+      <div class="cor-picker">
+        <label for="corTerciaria">Cor Terciária</label>
+        <input type="color" id="corTerciaria" value="#FFFFFF">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-column">
+    <div>
+      <label>Escudo (opcional):</label>
+      <input type="file" id="escudoEquipe" accept="image/*" onchange="mostrarPreviewEscudo(event)">
+    </div>
+    <div id="preview-escudo" style="margin-top: 10px;"></div>
+    <div class="zoom-container">
+      <label for="zoom-escudo">Zoom:</label>
+      <input type="range" id="zoom-escudo" min="0.5" max="2.5" step="0.1" value="1" oninput="ajustarZoomEscudo(this.value)">
+    </div>
+  </div>
+
+  <button type="submit" class="btn-modal-principal">Cadastrar e Adicionar</button>
+</form>
+    </div>
+
+    <div id="aba-equipes-existentes" class="aba-conteudo custom-scroll-area" style="display: none;">
+      <div class="barra-pesquisa">
+        <input type="text" id="pesquisa-equipes" placeholder="Pesquisar por nome ou país..." oninput="filtrarEquipesExistentes()">
+      </div>
+      <div id="lista-equipes-existentes" class="equipes-disponiveis-container"></div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button onclick="adicionarEquipesSelecionadas()" class="btn-modal-principal">Adicionar Equipes Selecionadas</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="modal-compartilhar" class="modal hidden">
+  <div class="modal-conteudo modal-conteudo-share">
+    <h2 id="modal-share-titulo">Compartilhar Imagem dos Potes</h2>
+    <div id="preview-imagem-container">
+      <p>Carregando pré-visualização...</p>
+    </div>
+    <div class="share-options">
+      <p>Escolha uma opção:</p>
+      <div class="botoes-share-container">
+        <a id="btn-download-imagem" class="share-btn download-btn" href="#" download="potes-torneio.png">
+          <i class="fas fa-download"></i>
+          <span>Baixar Imagem</span>
+        </a>
+        <button id="btn-native-share" class="share-btn native-share-btn">
+          <i class="fas fa-share-alt"></i>
+          <span>Outras Opções</span>
+        </button>
+      </div>
+    </div>
+    <button class="fechar-modal" onclick="document.getElementById('modal-compartilhar').classList.add('hidden')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+<div id="modal-favorita" class="modal hidden">
+  </div>
+
+<div id="modal-torneio" class="modal hidden">
+  <div class="modal-conteudo-torneio">
+    <h2 id="modal-torneio-titulo">Bem-vindo(a)!</h2>
+    <div id="formulario-torneio">
+      <div class="campo-formulario">
+        <label for="nome-torneio">Nome do Torneio:</label>
+        <input type="text" id="nome-torneio" placeholder="Ex: Champions League 2024">
+      </div>
+      <div class="campo-formulario">
+        <label for="imagem-torneio">Logo do Torneio (opcional):</label>
+        <input type="file" id="imagem-torneio" accept="image/*">
+        <div id="preview-imagem-torneio" class="preview-imagem">
+          <img src="images/logotype_dark.svg" alt="Logo padrão" id="imagem-preview">
+        </div>
+      </div>
+      <div class="botoes-formulario">
+        <button id="btn-criar-torneio" onclick="criarNovoTorneio()">
+          <i class="fas fa-plus-circle"></i> Criar Torneio
+        </button>
+        <button id="btn-carregar-torneio" onclick="abrirListaTorneiosSalvos()">
+          <i class="fas fa-folder-open"></i> Carregar Torneio Existente
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-lista-torneios" class="modal hidden">
+  <div class="modal-conteudo-torneio">
+    <h2>Selecionar Torneio</h2>
+    <ul id="lista-torneios-salvos" style="list-style: none; padding: 0;"></ul>
+    <button onclick="document.getElementById('modal-lista-torneios').classList.add('hidden')">Cancelar</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="js/coresEquipes.js"></script>
+<script src="js/potes.js"></script>
+<script src="js/sorteio.js"></script>
+<script src="js/jogos.js"></script>
+<script src="js/classificacao.js"></script>
+<script src="js/favorita.js"></script>
+<script src="js/grupos.js"></script>
+<script src="js/script.js"></script>
+<script src="https://accounts.google.com/gsi/client" onload="inicializarAplicacao()" async defer></script>
+<script>
+    mostrar('potes');
+    exibirPotes();
+</script>
+
+</body>
+</html>

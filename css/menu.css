@@ -1,0 +1,615 @@
+/* style.css atualizado com cards para potes e grupos */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200;1,500&display=swap');
+
+/* Variáveis CSS */
+:root {
+  --cor-primaria: #db27fa;
+  --cor-secundaria: #450458;
+  --cor-fundo: #0039BF;
+  --cor-header-fundo: #000;
+  --cor-menu-fundo: #0039BF;
+  --cor-branco: #fff;
+  --cor-azul-claro: #00B1FF;
+  --tamanho-fonte: 1rem;
+  --cor-texto: white;
+  --cor-fundo-card: rgba(255, 255, 255, 0);
+  --borda-radius: 0.5rem;
+  --cor-azul-royal: royalblue;
+  --cor-azul-marinho: rgb(10, 26, 71);
+  --largura-coluna: 130px;
+  --espaco-entre-colunas: 0.4rem;
+  --padding-lateral: 1rem;
+  --altura-card-equipe: 66px;
+  --gap-equipes: 0.4rem;
+  --largura-total: calc(9 * var(--largura-coluna) + 8 * var(--espaco-entre-colunas));
+  --margem-esquerda: var(--largura-coluna);
+  --largura-adversario: calc(8 * var(--largura-coluna) + 7 * var(--espaco-entre-colunas));
+  --largura-pote: calc(2 * var(--largura-coluna) + var(--espaco-entre-colunas));
+}
+
+/* style.css atualizado com cards para potes, grupos e header UEFA visual */
+
+/* style.css atualizado com cards para potes, grupos e header UEFA visual */
+
+/* Reset e Estilos Globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: var(--cor-texto);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-size: var(--tamanho-fonte);
+  background: linear-gradient(135deg, #0229de, #01096c); /* Gradiente */
+  padding: 0;
+}
+
+
+
+
+/* Header superior preto */
+.header-top {
+  background-color: #000;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; /* Esta propriedade alinha o primeiro item à esquerda e o último à direita */
+  align-items: center;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+
+.header-top .logo-text {
+  font-weight: bold;
+  color: white;
+  position: relative; /* Make it a positioning context for its children */
+  cursor: pointer; /* Indicate it's clickable */
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between text and icon */
+}
+
+.header-top .login {
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.header-top .login i {
+  font-size: 1rem;
+}
+
+.uefa-logo {
+  color: var(--cor-branco);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.uefa-logo span {
+  margin-right: 0.5rem;
+}
+
+.dropdown-icon {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease; /* Smooth rotation */
+}
+
+.logo-text.active .dropdown-icon {
+    transform: rotate(180deg); /* Rotate when active */
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.login-icon {
+  margin-left: 0.5rem;
+  font-size: 1.1rem;
+}
+
+
+/* Estilos para a barra de menu principal */
+/* Menu principal */
+.main-menu {
+  background: linear-gradient(135deg, #0229de, #01096c); /* Gradiente */
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu-items {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 2rem;
+}
+
+.menu-item {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  color: white;
+  transition: color 0.3s;
+}
+
+.menu-item:hover {
+  color: #db27fa;
+}
+
+.menu-item.active {
+  color: white;
+ /* border-bottom: 2px solid white;*/
+}
+
+.champions-logo img {
+  height: 40px;
+}
+
+
+/*.menu-item.active {
+  border-bottom: 2px solid white;
+}*/
+
+.menu-item.has-dropdown::after {
+  content: "▼";
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+
+
+/* Menu principal azul */
+/* Garante que o menu fique fixo no topo */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #0229de, #01096c);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  height: auto; /* Remova a altura fixa para acomodar os botões */
+}
+
+/* Mostra os botões apenas quando a tela de sorteio estiver ativa */
+.menu-sorteio-superior.hidden {
+  display: none;
+}
+
+
+
+nav .left-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+nav .menu-items {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav .menu-items a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+nav .menu-items a:hover,
+nav .menu-items a.active {
+  /*border-bottom: 2px solid white;*/
+  padding-bottom: 2px;
+}
+
+
+
+
+
+nav .menu-items a {
+  padding: 6px 16px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
+
+}
+
+/* Hover apenas para os links não ativos */
+nav .menu-items a:not(.active):hover {
+  color: var(--cor-azul-claro);
+  transition: color 0.3s ease;
+}
+
+/* Estilo do link ativo */
+nav .menu-items a.active {
+  background: var(--cor-azul-claro);
+  color: var(--cor-azul-marinho);
+  font-weight: bold;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+
+  /* Telas e containers */
+  .hidden {
+    display: none;
+  }
+  
+  .tela {
+    display: none;
+    /* Mantenha outras propriedades */
+  }
+  
+  .tela:not(.hidden) {
+    display: block;
+    width: 100%;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+/* Adicione este CSS ao final do arquivo menu.css */
+
+#login-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-info-logged {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.user-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.signout-button {
+  background-color: #0fd3d3;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.signout-button:hover {
+  background-color: #e835c1;
+}
+
+/* Cole este CSS no final do seu arquivo de estilo principal */
+
+/* Estilo para o Modal de Seleção de Torneio */
+.modal-conteudo-torneio {
+  background: hsl(331, 87%, 41%);
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  border: 2px solid var(--cor-azul-claro);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+}
+
+.modal-conteudo-torneio h2 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.modal-conteudo-torneio p {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.opcoes-torneio {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.opcoes-torneio button {
+  background-color: #fe0273;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.opcoes-torneio button:hover {
+  transform: scale(1.05);
+  background-color: #d11a66;
+}
+
+.opcoes-torneio button i {
+  font-size: 1.5rem;
+}
+
+.modal-conteudo-torneio {
+  background-color: #010560;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+}
+
+.campo-formulario {
+  margin-bottom: 20px;
+}
+
+.campo-formulario label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.campo-formulario input[type="text"],
+.campo-formulario input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #0232fe;
+  background-color: white;
+  color: black;
+}
+
+.botoes-formulario {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.botoes-formulario button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btn-criar-torneio {
+  background-color: #0232fe;
+  color: white;
+}
+
+#btn-carregar-torneio {
+  background-color: #0232fe;;
+  color: white;
+}
+
+.preview-imagem {
+  margin-top: 10px;
+  text-align: center;
+}
+
+#imagem-preview {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 4px;
+}
+
+/* Tournament Dropdown Menu */
+#tournament-menu {
+  position: absolute;
+  top: 100%; /* Position below the title */
+  left: 0;
+  background-color: #052341; /* Dark background */
+  border: 1px solid var(--cor-azul-claro);
+  border-radius: 5px;
+  list-style: none;
+  padding: 5px 0;
+  min-width: 180px;
+  box-shadow: 0 2px 10px #010560;
+  z-index: 100; /* Ensure it's above other elements */
+
+  /* ... existing styles ... */
+  z-index: 1001; /* A value higher than other elements like nav (z-index: 1000) */
+  /* ... existing styles ... */
+}
+
+#tournament-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: white;
+  font-weight: normal;
+  transition: background-color 0.2s ease;
+}
+
+#tournament-menu li:hover {
+  background-color: var(--cor-azul-royal); /* Lighter background on hover */
+}
+
+#modal-lista-torneios ul li {
+  background-color: #1a2d5a;
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s;
+}
+#modal-lista-torneios ul li:hover {
+  background-color: #0a77ff;
+}
+
+/* Estilos para o botão de login customizado do Google */
+.custom-google-btn {
+  background-color: var(--cor-azul-marinho); /* Usa a variável de cor azul marinho */
+  color: white;
+  border: 1px solid var(--cor-azul-claro); /* Adiciona uma borda sutil para destaque */
+  border-radius: 4px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-google-btn:hover {
+  background-color: #0056b3; /* Um azul um pouco mais claro no hover */
+}
+
+/* Estilo para o logo do Google dentro do botão */
+.custom-google-btn .google-logo-svg {
+  width: 18px;
+  height: 18px;
+  background-color: white; /* Mantém o fundo branco apenas para o logo, como no padrão */
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.nav-controls-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* INÍCIO DA ALTERAÇÃO: Estilo para a linha de controles */
+.nav-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaçamento entre os grupos de botões na mesma linha */
+    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+}
+/* FIM DA ALTERAÇÃO */
+
+/* ========================================================== */
+/* === BOTÃO DE LOGIN PERSONALIZADO - VERSÃO FINAL CORRIGIDA E REFINADA === */
+/* ========================================================== */
+
+/* 1. O contêiner principal (#custom-google-button-wrapper) que cria o visual do botão. */
+#login-container #custom-google-button-wrapper {
+  position: relative; /* Essencial para posicionar o botão invisível por cima. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Espaço entre a logo e o texto. */
+  
+  /* Estilos visuais para corresponder à imagem de referência */
+  background-color: #01096c;
+  border: 2px solid #4D81C3;
+  color: white;
+  
+  /* Formato e tamanho */
+  border-radius: 50px; /* Deixa o botão com as pontas totalmente arredondadas (pílula). */
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  
+  cursor: pointer;
+  overflow: hidden; /* Garante que nada "vaze" para fora das bordas arredondadas. */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito de hover para interatividade */
+#login-container #custom-google-button-wrapper:hover {
+  background-color: #001f8a;
+  border-color: #68cce1;
+  transform: scale(1.02); 
+}
+
+/* 2. O conteúdo que o usuário realmente vê. */
+#login-container .custom-google-button-content {
+  /* Este contêiner agora só serve para agrupar a logo e o texto. */
+  /* Os estilos de alinhamento foram movidos para o wrapper principal. */
+  z-index: 1; /* Garante que ele fique abaixo da camada de clique do Google. */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#login-container .google-logo-svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 3. O alvo de renderização do Google que fica INVISÍVEL por cima. */
+#google-render-target {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* A MÁGICA: Torna o container e TUDO DENTRO dele invisível, mas clicável. */
+  opacity: 0; 
+  
+  z-index: 2; /* Fica por cima do nosso conteúdo visual para receber o clique. */
+}

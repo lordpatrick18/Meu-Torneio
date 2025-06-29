@@ -1,0 +1,173 @@
+/* ===================================================================== */
+/* potes.css - VERSÃO FINAL COM 4 POTES POR LINHA                        */
+/* ===================================================================== */
+
+/* --- Container Geral dos Potes --- */
+.potes-container {
+  display: grid;
+  /* ALTERAÇÃO PRINCIPAL: Força a criação de 4 colunas de tamanho igual */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem 1.5rem; /* Ajuste no espaçamento para caber melhor */
+  padding: 2rem;
+  max-width: 1800px; /* Aumenta a largura máxima para acomodar os 4 potes */
+  margin: 1rem auto;
+}
+
+/* --- Wrapper para cada Pote --- */
+.pote-wrapper {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  gap: 0;
+  align-items: center;
+}
+
+/* --- Colunas Laterais --- */
+.pote-titulo-lateral, .botao-adicionar-lateral {
+  background: #0232fe;
+  color: white;
+  border: none;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 0.25rem;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+.pote-titulo-lateral {
+  border-radius: 9px 0px 0px 9px;
+  margin-top: -65px;
+}
+.botao-adicionar-lateral {
+  border-radius: 0px 9px 9px 0px;
+  margin-top: 65px;
+  transition: background-color 0.2s;
+}
+.botao-adicionar-lateral:hover {
+  background-color: #118dbe;
+}
+
+
+/* --- Card Central (Conteúdo Principal) --- */
+.pote-conteudo-principal {
+  background: #010560;
+  border-radius: 0 18px 18px 0;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #0232fe;
+  position: relative;
+  overflow: hidden;
+}
+
+.pote-conteudo-principal::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.100);
+  clip-path: polygon(0 0, 95% 0, 0% 55%, 0% 100%);
+  z-index: 0;
+}
+
+
+.pote-conteudo-principal ul {
+  list-style: none; padding: 0; margin: 0; flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Item da lista de equipes */
+.pote-equipe-item {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+.pote-equipe-item:last-child { border-bottom: none; }
+
+.pote-equipe-item .escudo {
+  width: 32px; height: 32px; object-fit: contain; border-radius: 50%;
+  background-color: white; padding: 2px; margin-right: 1rem; flex-shrink: 0;
+}
+
+/* --- Container para nome e país --- */
+.info-equipe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    gap: 0.25rem;
+}
+
+.pote-equipe-item .nome-equipe {
+  font-weight: 500; font-size: 1rem; color: white;
+}
+
+.pais-equipe-card {
+    background-color: #0232fe;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.pote-equipe-item .equipe-actions { display: flex; align-items: center; }
+.pote-equipe-item .action-btn { background: transparent; border: none; color: rgba(255, 255, 255, 0.8); font-size: 1rem; cursor: pointer; padding: 0.4rem; border-radius: 50%; margin-left: 0.25rem; transition: all 0.2s; }
+.pote-equipe-item .action-btn:hover { background-color: rgba(0, 0, 0, 0.2); color: white; }
+
+/* Placeholder para pote vazio */
+.pote-vazio-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===================================================================== */
+/* ESTILOS PRESERVADOS PARA MODAIS E BOTÕES GERAIS (NÃO ALTERAR)         */
+/* ===================================================================== */
+.botoes-tela-potes { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+#botao-preencher-potes, #botao-compartilhar-potes { color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+#botao-preencher-potes { background-color: #0a0a61; }
+#botao-preencher-potes:hover { background-color: #1a1ad1; transform: translateY(-2px); }
+#botao-compartilhar-potes { background-color: #28a745; }
+#botao-compartilhar-potes:hover { background-color: #218838; transform: translateY(-2px); }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+.modal-conteudo { width: 100%; max-width: 750px; max-height: 90vh; background: hsl(237, 98%, 19%); color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #0232fe; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.modal-header-card { display: flex; justify-content: flex-end; align-items: center; padding: 12px 20px; background-color: #0232fe; border-bottom: 2px solid var(--cor-azul-claro); flex-shrink: 0; position: relative; }
+.modal-header-card h2 { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; font-size: 1.2rem; color: white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.fechar-modal { position: static; background: transparent; border: none; font-size: 1.6rem; color: white; cursor: pointer; padding: 5px; line-height: 1; transition: all 0.3s ease; z-index: 2; }
+.fechar-modal:hover { color: #ff4d4d; transform: rotate(90deg); }
+.abas-modal { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; padding: 1rem; }
+.abas-modal button { background: #0040c0; color: white; border: 2px solid #0232fe; border-radius: 5px; padding: 8px 16px; font-weight: bold; cursor: pointer; transition: background-color 0.2s ease; }
+.abas-modal button:hover { background-color: #0056e0; }
+.aba-conteudo { border: 1px solid #ffffff; border-radius: 8px; padding: 20px; background-color: #ffffff00; overflow-y: auto; flex-grow: 1; min-height: 0; }
+.modal-conteudo label { display: block; margin-bottom: 5px; font-weight: bold; }
+.modal-conteudo input[type="text"], .modal-conteudo input[type="file"] { width: calc(100% - 20px); padding: 10px; border: 1px solid #ffffff; border-radius: 5px; background-color: #ffffff00; color: white; margin-bottom: 10px;}
+.equipes-disponiveis-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 10px; padding-right: 5px; }
+.equipe-card { position: relative; width: 100%; height: 135px; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box; cursor: pointer; border: 3px solid transparent; transition: all 0.2s ease; }
+.equipe-card:hover { transform: scale(1.05); }
+.equipe-card.selecionada { border-color: #00e6ff; box-shadow: 0 0 20px rgba(0, 230, 255, 0.7); }
+.equipe-card .escudo { width: 55px; height: 55px; object-fit: contain; margin-bottom: 8px; z-index: 1; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)); }
+.equipe-card .nome-modal { text-align: center; white-space: normal; word-break: break-word; font-weight: bold; color: white; width: 100%; line-height: 1.1; font-size: clamp(0.7rem, 1.5vw, 0.85rem); }
+.equipe-card .sigla-modal { background-color: #20eefb; color: #010560; padding: 2px 8px; border-radius: 5px; margin-top: 5px; font-size: 0.75rem; font-weight: bold; z-index: 1; }
+.checkbox-selecao { display: none; }

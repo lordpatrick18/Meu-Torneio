@@ -1,0 +1,683 @@
+/* Arquivo: sorteio.css */
+.botoes-sorteio {
+  display: flex;
+  background: #4151b9;
+  border-radius: 10px;
+  padding: 2px;
+  width: fit-content;
+  margin: 0; 
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+/* Efeito de brilho sutil */
+.botoes-sorteio::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  box-shadow: inset 0 0 15px rgba(255,255,255,0.1);
+  pointer-events: none;
+}
+
+/* Botões internos - manter consistência */
+.botoes-sorteio button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+
+/* Destaque AZUL CLARO (Visualização / Filtro / Padrão) */
+.botoes-sorteio button.viewing {
+  background-color: var(--cor-azul-claro);
+  color: var(--cor-azul-marinho);
+  font-weight: bold;
+}
+
+
+/* Destaque AZUL MARINHO (Clique Direto) */
+.botoes-sorteio button.active {
+  background: #0a0a61;
+  box-shadow: 0 2px 8px rgba(0,179,255,0.3);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .botoes-sorteio {
+    width: 95%;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .botoes-sorteio button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+}
+.botoes-sorteio:not(.hidden) {
+  display: flex;
+}
+
+.botoes-sorteio button {
+  padding: 8px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botoes-sorteio button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.botoes-sorteio button.active {
+  background: #0a0a61;
+  color: white;
+  font-weight: bold;
+}
+
+/* Aumentar distância entre título e card */
+.grupo-completo {
+  margin-bottom: 55px;
+  break-inside: avoid;
+}
+
+.grupo-header {
+  background: #0232fe;
+  color: var(--cor-branco);
+  padding: 12px 15px;
+  font-weight: bold;
+  text-align: center; /* Centraliza horizontalmente */
+  display: flex;
+  justify-content: center; /* Alinhamento horizontal */
+  align-items: center; /* Alinhamento vertical */
+  border-radius: 10px; /* Arredonda apenas o topo */
+  margin-bottom: 10px; /* Aumentei de 0 para 8px */
+  width: 100%;
+  box-sizing: border-box; /* Inclui padding na largura total */
+  border-left: 4px solid var(--cor-azul-claro);
+}
+
+
+/* ===== ALTERAÇÃO AQUI ===== */
+.grupo-item {
+  width: 240px;
+  background: #010560;
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--cor-cinza-medio);
+  border-top: none;
+  margin-top: 0;
+  padding: 1rem;
+  border-left: 4px solid var(--cor-azul-claro);
+  min-height: 280px; /* GARANTE ALTURA MÍNIMA */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Centralizar os grupos-container */
+.grupos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 15px 2px;
+  justify-content: center; /* Centraliza os grupos */
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+  color: var(--cor-branco);
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1em;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--cor-cinza-claro);
+}
+
+h3 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+/* ===== ALTERAÇÃO AQUI ===== */
+.grupo-equipes {
+  padding: 10px 0;
+  flex-grow: 1; /* Faz o container das equipes crescer */
+  display: flex;
+  flex-direction: column;
+}
+
+.grupo-equipe {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--cor-cinza-claro);
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+/* INÍCIO DA ALTERAÇÃO: Estilo para os cards da Fase Final */
+.grupos-container.final-phase .grupo-equipe {
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.grupos-container.final-phase .grupo-equipe .nome-completo {
+    color: white;
+}
+
+.grupo-equipe-vazio {
+    padding: 20px;
+    text-align: center;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+    border: 2px dashed var(--cor-azul-claro);
+    border-radius: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* FIM DA ALTERAÇÃO */
+
+/* Para o card vazio, centraliza a mensagem e ocupa o espaço */
+.grupo-equipes .grupo-equipe[style*="justify-content: center"] {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    border-bottom: none;
+}
+
+
+.grupo-equipe:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.grupo-equipe:last-child {
+  border-bottom: none;
+}
+
+/* Elementos das Equipes */
+.equipe-escudo {
+  width: 28px;
+  height: 28px;
+  margin-right: -20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6.1px;
+  margin-left: -25px; /* Adiciona espaço à esquerda */
+}
+
+.equipe-escudo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.equipe-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.equipe-nome {
+  font-weight: 500;
+  font-size: 0.79em;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.equipe-pais {
+  font-size: 0.75em;
+  color: var(--cor-cinza-escuro);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* Barra de Scroll Personalizada */
+.grupos-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.grupos-container::-webkit-scrollbar-track {
+  background: var(--cor-cinza-claro);
+  border-radius: 4px;
+}
+
+.grupos-container::-webkit-scrollbar-thumb {
+  background: var(--cor-azul-royal);
+  border-radius: 4px;
+}
+
+.grupos-container::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-azul-marinho);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .botoes-sorteio {
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .botoes-sorteio button {
+    padding: 8px 15px;
+    font-size: 0.85em;
+  }
+  
+  .grupo-item {
+    min-width: 200px;
+  }
+  
+  .equipe-escudo {
+    width: 24px;
+    height: 24px;
+    margin-right: 0px;
+  }
+  
+  .equipe-nome {
+    font-size: 0.9em;
+  }
+  
+  .equipe-pais {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 480px) {
+  .botoes-sorteio {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .botoes-sorteio button {
+    width: 100%;
+  }
+  
+  .grupo-item {
+    min-width: 180px;
+  }
+  
+  .grupo-header {
+    padding: 10px;
+    font-size: 1em;
+  }
+  
+  .grupo-equipe {
+    padding: 10px 12px;
+  }
+}
+
+/* Classes de Utilidade */
+.hidden {
+  display: none !important;
+}
+
+.tela {
+  display: none;
+}
+
+.tela:not(.hidden) {
+  display: block;
+}
+
+.fase-selector {
+  margin-bottom: 20px;
+  padding: 10px;
+  background: var(--cor-azul-royal);;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fase-selector label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: var(--cor-azul-claro);
+}
+
+.fase-selector select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--cor-azul-marinho);
+  font-size: 14px;
+  background-color: var(--cor-azul-royal);
+  cursor: pointer;
+}
+
+.fase-selector select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+}
+
+.rodada-titulo {
+  background-color: var(--cor-azul-royal);
+  color: var(--cor-azul-marinho);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 20px 0 10px 0;
+  font-size: 1.1em;
+}
+
+/* Mantenha ou atualize este estilo */
+.grupo-equipe[style*="justify-content: center"] {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  border-bottom: none !important;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.botoes-sorteio[style] {
+  width: 100% !important;
+  max-width: 400px;
+}
+
+.botoes-sorteio[style] button {
+  width: 100%;
+  padding: 12px 20px !important;
+  font-size: 1.1em !important;
+}
+
+/* No arquivo sorteio.css */
+.botoes-sorteio-container {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.botoes-sorteio-container.hidden {
+  display: none;
+}
+
+.filtro-fase-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0; 
+  z-index: 10;
+}
+
+/* sorteio.css */
+/* ... suas outras regras CSS ... */
+.filtro-fase-btn #fase-selecionada {
+  color: #68cce1; /* Defina a cor desejada aqui */
+}
+
+/* Mantenha a regra original do .filtro-fase-btn com a borda e outros estilos */
+.filtro-fase-btn {
+  background: transparent;
+  border: 1px solid #68cce1;
+  /* Remova ou comente a linha 'color' daqui, pois será definida no span */
+  /* color: #68cce1; */ 
+  padding: 10px 18px;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 11;
+  justify-content: center;
+}
+
+/* ... o resto do seu CSS ... */
+
+.filtro-fase-btn i {
+  margin-left: 5px; /* Ajustado para espaçamento após o ícone da imagem */
+}
+
+.filtro-fase-btn:hover {
+  background: rgba(0, 200, 255, 0.1);
+}
+
+.filtro-fase-lista {
+  position: absolute;
+  top: calc(100% + 5px); /* Posição abaixo do botão */
+  background: #2a3a80;
+  border: 1px solid #00c8ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  overflow: hidden;
+  z-index: 100; /* Garante que o dropdown fique acima de outros elementos */
+  padding: 5px 0;
+}
+
+.filtro-fase-lista.hidden {
+  display: none;
+}
+
+.filtro-fase-lista .filtro-item {
+  padding: 10px 15px;
+  color: #68cce1;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+  text-align: center;
+}
+
+.filtro-fase-lista .filtro-item:hover {
+  background: rgba(0, 200, 255, 0.1);
+  color: #68cce1;
+  }
+
+
+.filtro-fase-lista .filtro-item.active {
+  background: #0a0a61;
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilo para a imagem do ícone da fase */
+.icone-fase-selecionada {
+  width: 20px; /* Ajuste o tamanho da imagem conforme necessário */
+  height: auto; /* Mantém a proporção da imagem */
+  vertical-align: middle; /* Ajuda no alinhamento vertical com o texto */
+  /* margin-left: 5px;  já coberto pelo 'gap' no .filtro-fase-btn */
+}
+
+
+.sigla-pais {
+  font-size: 0.7rem;
+  color: var(--cor-azul-claro);
+  text-align: center;
+  margin-top: auto;
+  padding: 2px 5px;
+  background: white;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === ESTILOS PARA A GRADE DE CARDS VAZIOS === */
+
+/* === ESTILOS ATUALIZADOS PARA A GRADE DE CARDS VAZIOS === */
+
+/* === ESTILOS FINAIS PARA A GRADE DE CARDS VAZIOS (9 COLUNAS) === */
+
+.grid-vazio-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* ALTERADO: De 9 para 7 colunas */
+  gap: 8px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+/* Estilo base para todos os cards */
+.card-vazio {
+  border-radius: 8px;
+  height: 65px;
+}
+
+/* Estilo para o PRIMEIRO card (título do pote) */
+.card-pote-titulo {
+  background-color: var(--cor-branco, #fff) !important;
+  color: var(--cor-azul-marinho, rgb(10, 26, 71));
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+  line-height: 1.2;
+  height: 85px;
+}
+
+/* NOVO: Estilo para os cards de título "Casa" e "Fora" */
+.card-coluna-titulo {
+    color: var(--cor-branco, #fff); /* Cor do texto branca */
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85px; /* Mesmo tamanho maior do card de título do pote */
+}
+
+/* Coluna 1 (Branca) - A regra :first-child agora só afeta o título */
+/* Coluna 1 (Branca) */
+.card-vazio:nth-child(7n + 1) { /* ALTERADO: De 9n para 7n */
+  background-color: var(--cor-branco, #fff);
+}
+
+/* Colunas Pares (2, 4, 6) - Azul Royal */
+.card-vazio:nth-child(7n + 2),
+.card-vazio:nth-child(7n + 4),
+.card-vazio:nth-child(7n + 6) { /* ALTERADO: Removido o seletor para coluna 8 */
+  background-color: var(--cor-azul-royal, royalblue);
+}
+
+/* Colunas Ímpares (3, 5, 7) - Azul Marinho */
+.card-vazio:nth-child(7n + 3),
+.card-vazio:nth-child(7n + 5),
+.card-vazio:nth-child(7n + 7) { /* ALTERADO: Removido o seletor para coluna 9 */
+  background-color: var(--cor-azul-marinho, rgb(10, 26, 71));
+}
+
+/* Estilo para aumentar o tamanho do primeiro card de cada coluna */
+.grid-vazio-container .card-vazio:nth-child(-n + 7) {
+  height: 35px; /* Aumenta a altura (o original é 65px) */
+  border: 2px solid var(--cor-azul-claro, #00B1FF); /* Adiciona uma borda para destacar */
+}
+
+/* === ESTILOS PARA OS CARDS SORTEADOS === */
+
+.card-sorteado {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    gap: 2px;
+    box-sizing: border-box;
+    text-align: center;
+    color: white; /* Cor padrão do texto é branca */
+}
+
+.grupo-letra-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: var(--cor-azul-claro);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8em;
+    z-index: 5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.escudo-sorteado {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-bottom: 2px;
+}
+
+.nome-sorteado {
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.1;
+    word-break: break-word;
+}
+
+.card-vazio.card-sorteado:nth-child(7n + 1) .nome-sorteado {
+    color: #000;
+}
+
+.pais-sorteado {
+    background-color: #20eefb;
+    color: white;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: bold;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* Botões dos potes alinhados na mesma linha */
+.botoes-potes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-top: 0; 
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: auto;
+}
+
+.botoes-potes button {
+  white-space: nowrap;
+  flex: 0 0 auto;
+  padding: 10px 16px;
+}
+
+.botoes-potes button.active {
+  background: #0a0a61;
+  font-weight: bold;
+  color: white;
+}
+
+.botoes-potes button.viewing {
+    background-color: var(--cor-azul-claro);
+    color: var(--cor-azul-marinho);
+    font-weight: bold;
+}

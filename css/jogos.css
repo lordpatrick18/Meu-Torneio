@@ -1,0 +1,287 @@
+/* --- Estilos para Funcionalidades (Botões, Inputs, etc.) --- */
+
+.grupo-jogos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
+}
+
+.botoes-controle-placar {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  gap: 10px;
+}
+
+#btn-preencher-placares {
+  background-color: #0a0a61;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#btn-preencher-placares:hover {
+  background-color: #1a1ad1;
+}
+
+/* --- Estilos para o Card Visual Interno --- */
+
+.card-partida-visual {
+  background-color: #010560;
+  border-radius: 16px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2px; /* AJUSTADO de 12px */
+  height: 100px;
+}
+
+.equipe-lado {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.logo-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- BANNERS --- */
+
+.escudo-partida {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  z-index: 3;
+}
+
+.detalhes-equipe-partida {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.nome-equipe-partida {
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.pais-equipe-partida {
+  background-color: #20eefb;
+  color: #010560;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+
+/* ===== LAYOUT CENTRAL ===== */
+.info-partida {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 20px;
+}
+
+.input-data-hora {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: right;
+  width: 125px;
+  filter: invert(1);
+}
+
+.detalhes-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dia-semana {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  width: 0px;
+  text-align: center;
+}
+
+.placar-partida {
+  position: static;
+  transform: none;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  order: 2;
+  transform: translate(-0%, -50%);
+}
+
+.formato-header {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.placar-valor { display: flex; align-items: center; gap: 4px; }
+
+.placar-input {
+  height: 40px;
+  width: 40px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  background: #0232fe;;
+  border-radius: 10px;
+}
+
+.placar-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.indicador-vitoria {
+  color: var(--cor-azul-claro);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0 0px;
+}
+
+.placar-separador {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--cor-azul-claro);
+}
+
+/* --- Estilos para os Botões de Filtro (Mantidos) --- */
+.menu-jogos-superior {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 10px auto;
+  gap: 10px;
+}
+.fase-botoes-jogos,
+.rodadas-container {
+  display: flex;
+  background: #4151b9;
+  border-radius: 10px;
+  padding: 2px;
+  width: fit-content;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.botoes-jogos button, 
+.rodada-btn {
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.botoes-jogos button:hover, 
+.rodada-btn:hover { 
+  background: rgba(255, 255, 255, 0.2); 
+}
+.botoes-jogos button.active, 
+.rodada-btn.selecionada { 
+  background: #0a0a61; 
+  font-weight: bold; 
+}
+.rodadas-scroll { 
+  display: flex; 
+  overflow-x: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  gap: 2px; 
+}
+.rodadas-scroll::-webkit-scrollbar { 
+  display: none; 
+}
+
+.indicador-container {
+  width: 25px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========================================================== */
+/* === BANNER ESTILO FINAL (COM INCLINAÇÃO CORRIGIDA) ======= */
+/* ========================================================== */
+
+/* Estilo base para todos os banners */
+.banner-1, .banner-2, .banner-3 {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 40%;
+}
+
+/* Camadas e Ordem de Sobreposição */
+.banner-1 { z-index: 1; }
+.banner-3 { z-index: 2; } 
+.banner-2 { z-index: 3; }
+.escudo-partida { z-index: 4; }
+
+/* --- Banners da Equipe da CASA (Inclinados para a direita: \) --- */
+.banner-casa-1 { left: 0px; clip-path: polygon(0% 0, 68.3% 0, 48.3% 100%, 0% 100%); border-top-left-radius: 16px; }
+.banner-casa-3 { left: 0px; clip-path: polygon(66.3% 0, 76.7% 0, 51.7% 100%, 41.3% 100%); }
+.banner-casa-2 { left: 0px; clip-path: polygon(76.7% 0, 100% 0, 75% 100%, 51.7% 100%); }
+
+/* --- Banners da Equipe VISITANTE (Inclinados para a direita: \) --- */
+/* CORREÇÃO DE ALTA PRECISÃO: Garante paralelismo e alinhamento de borda. */
+.banner-visitante-1 { right: 0px; clip-path: polygon(56.7% 0, 100% 0, 100% 100%, 31.7% 100%); border-top-right-radius: 16px; }
+.banner-visitante-3 { right: 0px; clip-path: polygon(43.4% 0, 58.7% 0, 33.7% 100%, 18.4% 100%); }
+.banner-visitante-2 { right: 0px; clip-path: polygon(25% 0, 48.4% 0, 23.4% 100%, 0% 100%); }

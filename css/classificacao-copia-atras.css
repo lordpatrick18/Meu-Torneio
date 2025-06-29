@@ -1,0 +1,33 @@
+/* === CORREÇÃO FINAL: CÓPIA ATRÁS DO CARD ORIGINAL === */
+
+.card-info.equipe {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.card-info.equipe::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #008cff;
+  border-radius: 10px;
+  transform: rotate(4deg) scale(1.03);
+  opacity: 0.8;
+  z-index: 0;
+}
+
+/* Todos os conteúdos visuais do card devem estar acima da cópia */
+.card-info.equipe > * {
+  position: relative;
+  z-index: 2;
+}
+.equipe-main-content,
+.posicao-interno,
+.variacao-interno {
+  position: relative;
+  z-index: 2;
+}

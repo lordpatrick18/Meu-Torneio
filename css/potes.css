@@ -1,0 +1,420 @@
+/* ===================================================================== */
+/* potes.css - VERSÃO FINAL COM AMBOS OS CARDS LATERAIS REDUZIDOS        */
+/* ===================================================================== */
+
+/* --- Container Geral dos Potes --- */
+/* --- Container Geral dos Potes --- */
+.potes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(335px, 1fr));
+  gap: 0rem 0rem;
+  padding: -10rem;
+  max-width: 1700px;
+  margin: 0rem auto;
+}
+/* --- Wrapper para cada Pote (Título + Card + Botão) --- */
+.pote-wrapper {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  gap: 0;
+  align-items: center;
+}
+
+/* --- Coluna da Esquerda (Título Vertical) --- */
+.pote-titulo-lateral {
+  background: #0232fe;
+  color: white;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  /* FONTES, ESPAÇAMENTO E BORDAS REDUZIDAS */
+  font-weight: 700;
+  font-size: 1.5rem;      /* Metade de 1rem */
+  text-transform: uppercase;
+  letter-spacing: 5px;  /* Metade de 2px */
+  border-radius: 0px 9px 9px 0px; /* Metade de 18px */
+  /* PADDING E ALTURA REDUZIDOS */
+  padding: 0.5rem 0.25rem; /* Metade de 1rem 0.5rem */
+  height: 130px;            /* Metade de 200px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* MARGEM AJUSTADA */
+  margin-top: -220px;
+}
+
+
+/* --- Card Central (Conteúdo Principal) --- */
+.pote-conteudo-principal {
+  background: #010560;
+  border-radius: 0 18px 18px 18px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  height: 350px; /* << MUDANÇA PRINCIPAL: De min-height para height fixo */
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #0232fe;
+  position: relative;
+  /* overflow: hidden; foi removido para permitir a rolagem interna da lista */
+}
+
+/* === POLÍGONO INTERNO (EFEITO DE LUZ) === */
+.pote-conteudo-principal::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+    background-color: rgba(255, 255, 255, 0.100);
+  clip-path: polygon(0 0, 95% 0, 0% 55%, 0% 100%);
+  z-index: 0;
+}
+
+
+.pote-conteudo-principal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* << Adicione esta linha */
+}
+.pote-equipe-item:last-child { border-bottom: none; }
+
+/* --- Item da lista de equipes --- */
+/* --- Item da lista de equipes --- */
+.pote-equipe-item {
+  display: flex;
+  align-items: center;
+  /* AJUSTE FINAL: Diminui o padding esquerdo para recuar todo o conteúdo */
+  padding: 0rem 0rem; /* O primeiro valor é cima/baixo, o segundo é esquerda/direita */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+.pote-equipe-item:last-child { border-bottom: none; }
+
+.pote-equipe-item .escudo {
+  width: 40px; height: 40px; object-fit: contain; border-radius: 0%;
+  background-color: rgba(255, 255, 255, 0); padding: 2px; margin-right: 0.2rem; /* Margem entre escudo e nome */
+  flex-shrink: 0;
+}
+
+/* --- NOVO: Container para nome e país --- */
+.info-equipe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha à esquerda */
+    flex-grow: 1;
+    gap: 0.3rem; /* Espaço entre nome e país */
+}
+
+.pote-equipe-item .nome-equipe {
+  font-weight: 500; font-size: 1rem; color: white; flex-grow: 1; justify-content: left;
+}
+
+/* --- NOVO: Estilo para o card do país --- */
+.pais-equipe-card {
+    background-color: #0232fe;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+
+/* --- AJUSTE FINAL: Container dos botões de ação --- */
+.pote-equipe-item .equipe-actions {
+  display: flex;
+  /* Organiza os botões em uma coluna vertical */
+  flex-direction: column;
+  /* Remove o espaçamento lateral antigo */
+  margin-left: -25px;
+  /* Adiciona um pequeno espaçamento entre os botões */
+  gap: 0.2rem;
+}
+
+.pote-equipe-item .action-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem; /* Levemente reduzido para o novo layout */
+  cursor: pointer;
+  padding: 0.2rem; /* Padding ajustado */
+  border-radius: 50%;
+  transition: all 0.2s;
+  width: 28px; /* Largura fixa */
+  height: 28px; /* Altura fixa */
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+.pote-equipe-item .action-btn:hover { background-color: rgba(0, 0, 0, 0.2); color: white; }
+
+/* Placeholder para pote vazio */
+.pote-vazio-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  flex-grow: 1; /* Garante que ele ocupe o espaço para centralizar o texto */
+}
+
+
+/* --- Coluna da Direita (Botão Adicionar Vertical) --- */
+.botao-adicionar-lateral {
+  background: #0232fe;
+  color: white;
+  border: none;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  /* FONTES, ESPAÇAMENTO E BORDAS REDUZIDAS */
+  font-weight: 700;
+  font-size: 0.8rem;      /* Metade de 1rem */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;  /* Metade de 2px */
+  border-radius: 9px 0px 0px 9px; /* Metade de 18px */
+  /* PADDING E ALTURA REDUZIDOS */
+  padding: 0.05 rem 0.05rem; /* Metade de 1rem 0.5rem */
+  height: 100px;            /* Metade de 200px */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 0.2s;
+  /* MARGEM AJUSTADA */
+  margin-top: 200px;         /* Metade de 130px */
+}
+.botao-adicionar-lateral:hover {
+  background-color: #118dbe;
+}
+
+
+/* ===================================================================== */
+/* ESTILOS PRESERVADOS PARA MODAIS E BOTÕES GERAIS (NÃO ALTERAR)         */
+/* ===================================================================== */
+.botoes-tela-potes { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+#botao-preencher-potes, #botao-compartilhar-potes { color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+#botao-preencher-potes { background-color: #0a0a61; }
+#botao-preencher-potes:hover { background-color: #1a1ad1; transform: translateY(-2px); }
+#botao-compartilhar-potes { background-color: #28a745; }
+#botao-compartilhar-potes:hover { background-color: #218838; transform: translateY(-2px); }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+.modal-conteudo { width: 100%; max-width: 750px; max-height: 90vh; background: hsl(237, 98%, 19%); color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #0232fe; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.modal-header-card { display: flex; justify-content: flex-end; align-items: center; padding: 12px 20px; background-color: #0232fe; border-bottom: 2px solid var(--cor-azul-claro); flex-shrink: 0; position: relative; }
+.modal-header-card h2 { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; font-size: 1.2rem; color: white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+.fechar-modal { position: static; background: transparent; border: none; font-size: 1.6rem; color: white; cursor: pointer; padding: 5px; line-height: 1; transition: all 0.3s ease; z-index: 2; }
+.fechar-modal:hover { color: #ff4d4d; transform: rotate(90deg); }
+.abas-modal { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; padding: 1rem; }
+.abas-modal button { background: #0040c0; color: white; border: 2px solid #0232fe; border-radius: 5px; padding: 8px 16px; font-weight: bold; cursor: pointer; transition: background-color 0.2s ease; }
+.abas-modal button:hover { background-color: #0056e0; }
+.aba-conteudo { border: 1px solid #00e6ff; border-radius: 8px; padding: 20px; background-color: #ffffff00; overflow-y: auto; flex-grow: 1; min-height: 0; }
+.modal-conteudo label { display: block; margin-bottom: 5px; font-weight: bold; }
+.modal-conteudo input[type="text"], .modal-conteudo input[type="file"] { width: calc(100% - 20px); padding: 10px; border: 1px solid #ffffff; border-radius: 5px; background-color: #ffffff00; color: white; margin-bottom: 10px;}
+.equipes-disponiveis-container { 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 130px);
+  gap: 10px; padding-right: 5px; }
+.equipe-card { position: relative; width: 100%; height: 135px; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box; cursor: pointer; border: 3px solid transparent; transition: all 0.2s ease; }
+.equipe-card:hover { transform: scale(1.05); }
+.equipe-card.selecionada { border-color: #00e6ff; box-shadow: 0 0 20px rgba(0, 230, 255, 0.7); }
+.equipe-card .escudo { width: 55px; height: 55px; object-fit: contain; margin-bottom: 8px; z-index: 1; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)); }
+.equipe-card .nome-modal { text-align: center; white-space: normal; word-break: break-word; font-weight: bold; color: white; width: 100%; line-height: 1.1; font-size: clamp(0.7rem, 1.5vw, 0.85rem); }
+.equipe-card .sigla-modal { background-color: #20eefb; color: #010560; padding: 2px 8px; border-radius: 5px; margin-top: 5px; font-size: 0.75rem; font-weight: bold; z-index: 1; }
+.checkbox-selecao { display: none; }
+
+
+/* Estilo Unificado para Botões de Ação do Modal */
+.btn-modal-principal {
+  display: block;
+  width: 100%;
+  background: #0040c0;
+  color: white;
+  border: 2px solid #0232fe;
+  border-radius: 5px;
+  padding: 12px 16px; /* Padding ajustado para um botão principal */
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Opcional: para deixar o texto em maiúsculas */
+  letter-spacing: 0.5px;   /* Opcional: pequeno espaçamento entre letras */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px; /* Espaço acima do botão */
+}
+
+.btn-modal-principal:hover {
+  background-color: #0056e0; /* Efeito hover igual ao das abas */
+}
+
+/* =================================================== */
+/* === LAYOUT MEIO A MEIO DO MODAL DE CADASTRO ====== */
+/* =================================================== */
+
+/* Container principal para as colunas */
+.form-columns-container {
+  display: flex;
+  gap: 20px; /* Espaço entre as duas colunas */
+}
+
+/* Define que cada coluna ocupará metade do espaço */
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajustes na coluna da direita */
+.form-column:last-child {
+  align-items: center; /* Centraliza os itens da coluna direita */
+}
+
+/* Otimiza o container das cores */
+.cores-picker-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+
+
+/* Centraliza o botão de submit fora das colunas */
+#form-cadastro-equipe > button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+}
+
+/* =================================================== */
+/* === CORREÇÃO DO TAMANHO DO PREVIEW DO ESCUDO ====== */
+/* =================================================== */
+
+
+
+/* =================================================== */
+/* === ESTILO DE BARRA DE ROLAGEM UNIFICADO ======== */
+/* =================================================== */
+.custom-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scroll-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.custom-scroll-area::-webkit-scrollbar-thumb {
+  background: #0232fe;
+  border-radius: 4px;
+}
+.custom-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #0056e0;
+}
+
+/* =================================================== */
+/* === SELETORES DE COR CIRCULARES =================== */
+/* =================================================== */
+.cor-picker input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;  /* Define a largura do círculo */
+  height: 40px; /* Define a altura do círculo */
+  padding: 0;
+  border: none;
+  border-radius: 50%; /* << A MÁGICA ACONTECE AQUI! */
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Borda para melhor visualização */
+}
+
+/* Remove a cor de fundo padrão do seletor no Chrome/Edge */
+.cor-picker input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.cor-picker input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* ADICIONE ESTE NOVO BLOCO */
+.equipe-card .nome-modal {
+  font-weight: bold; /* Deixa a fonte mais cheia para o efeito */
+  text-shadow:
+    /* Contorno preto em todas as direções */
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+    -2px  0   0 #000,
+     2px  0   0 #000,
+     0   -2px 0 #000,
+     0    2px 0 #000;
+}
+
+/* ========================================================== */
+/* === LAYOUT DE 2 COLUNAS PARA O MODAL DE CADASTRO ========= */
+/* ========================================================== */
+
+/* Transforma o formulário em um container flexível */
+#form-cadastro-equipe {
+  display: flex;
+  flex-wrap: wrap; /* Permite que o botão vá para a próxima linha */
+  gap: 25px;       /* Espaço entre as colunas */
+}
+
+/* Define que cada coluna ocupará o espaço disponível */
+.form-column {
+  flex: 1; /* Faz cada coluna crescer igualmente */
+  min-width: 250px; /* Largura mínima para responsividade */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Garante que o botão de submit ocupe a largura total abaixo das colunas */
+#form-cadastro-equipe > button[type="submit"] {
+  width: 100%;
+  margin-top: 15px; /* Espaço acima do botão */
+}
+
+/* ========================================================== */
+/* === ESTILO CIRCULAR PARA O PREVIEW DO ESCUDO ============= */
+/* ========================================================== */
+
+/* Define o container geral do preview */
+#preview-escudo {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+/* Cria o frame circular branco que envolve a imagem.
+   (O JavaScript já cria um .preview-frame) */
+#preview-escudo .preview-frame {
+  width: 130px;  /* Largura do círculo */
+  height: 130px; /* Altura do círculo */
+  border-radius: 50%; /* Essencial: Transforma o quadrado em círculo */
+  background-color: rgba(255, 255, 255, 0.095); /* Fundo branco, como na imagem */
+  border: 3px solid #0232fe; /* Borda azul para combinar com o layout */
+  padding: 10px; /* Espaço interno para a imagem não "colar" na borda */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Essencial: Esconde as partes da imagem que ficam fora do círculo */
+}
+
+/* Estiliza a imagem DENTRO do frame circular */
+#preview-escudo #preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Garante que a imagem caiba inteira, mantendo a proporção */
+}

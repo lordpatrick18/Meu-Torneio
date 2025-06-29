@@ -1,0 +1,152 @@
+/* ========================================================== */
+/* FAVORITA.CSS - VERSÃO FINAL CORRIGIDA (COM SCROLLBAR)      */
+/* ========================================================== */
+
+/* --- Estilos do Modal de Seleção --- */
+.modal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: flex; justify-content: center; align-items: center;
+}
+.modal-conteudo {
+  width: 100%; max-width: 750px; max-height: 90vh;
+  background: hsl(237, 98%, 19%);
+  color: white; border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #0232fe;
+  display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+}
+
+/* --- Animação reutilizável --- */
+@keyframes gradient-animation {
+  from { background-position: 0% center; }
+  to { background-position: -200% center; }
+}
+
+/* --- Efeito no TEXTO do Nome da Equipe --- */
+.nome-favorito {
+  background: linear-gradient(90deg, #FFA500, #d127df, #FFA500);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-animation 3s linear infinite;
+  font-weight: bold !important;
+}
+
+/* --- Efeito no FUNDO do Card da Sigla do País --- */
+.pais-favorito-gradient {
+    background: linear-gradient(90deg, #FFA500, #d127df, #FFA500);
+    background-size: 200% auto;
+    animation: gradient-animation 4s linear infinite;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* --- Estilos do Botão Principal --- */
+.favorite-button {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px; background: transparent; color: white;
+  border: 2px solid white; border-radius: 30px;
+  font-weight: bold; cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.favorite-button:not(.favorita-selecionada):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.03);
+}
+.favorite-button img.escudo-favorita {
+  width: 24px; height: 24px; object-fit: contain;
+}
+
+/* --- Botão quando uma favorita está selecionada --- */
+.favorite-button.favorita-selecionada {
+    position: relative;
+    border: 2px solid transparent;
+    background-color: #01096c;
+    background-clip: padding-box;
+    transition: all 0.3s;
+}
+.favorite-button.favorita-selecionada::before {
+    content: ''; position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1; margin: -2px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #FFA500, #d127df, #FFA500);
+    background-size: 200% auto;
+    animation: gradient-animation 3s linear infinite;
+}
+.favorite-button.favorita-selecionada .nome-favorita,
+.favorite-button.favorita-selecionada .pais-favorita {
+    background: linear-gradient(90deg, #FFA500, #d127df, #FFA500);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-animation 3s linear infinite;
+}
+
+/* --- Efeito de Inversão no Hover --- */
+.favorite-button.favorita-selecionada:hover {
+    background-color: transparent;
+    background: linear-gradient(90deg, #FFA500, #d127df, #FFA500);
+    background-size: 200% auto;
+    animation: gradient-animation 3s linear infinite;
+}
+.favorite-button.favorita-selecionada:hover .nome-favorita,
+.favorite-button.favorita-selecionada:hover .pais-favorita {
+    background: none;
+    -webkit-text-fill-color: #01096c;
+    color: #01096c;
+    animation: none;
+}
+
+/* --- Cabeçalho e Área de Rolagem do Modal --- */
+.modal-header-card {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.modal-header-card h3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+.custom-scroll-area {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem 1.5rem;
+}
+
+/* --- CÓDIGO DA BARRA DE ROLAGEM RESTAURADO --- */
+.custom-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scroll-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.custom-scroll-area::-webkit-scrollbar-thumb {
+  background: #0232fe;
+  border-radius: 4px;
+}
+.custom-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #0056e0;
+}
+
+/* =================================================== */
+/* === GARANTE 5 EQUIPES POR LINHA NO MODAL FAVORITAS === */
+/* =================================================== */
+.modal-conteudo .equipes-disponiveis-container {
+  grid-template-columns: repeat(5, 1fr);
+} 
