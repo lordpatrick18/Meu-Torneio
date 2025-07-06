@@ -256,8 +256,12 @@ function exibirClassificacao() {
   const equipesFiltradas = classificacaoComVariacao.slice(0, limite);
 
   // Inicia a construção do HTML da tabela de classificação
+// Na função exibirClassificacao() em classificacao.js
+
+  // Inicia a construção do HTML da tabela de classificação
   let html = `
-    <div class="linha-cards header">
+    <div class="classificacao-scroll-container">
+      <div class="linha-cards header">
         <div class="card-info-header equipe-cabecalho">
             <div class="cabecalho-pos-var">
                 <div class="posicao-interno">POS</div>
@@ -385,7 +389,9 @@ function exibirClassificacao() {
   });
 
   // Finaliza e insere o HTML na página
-  html += `</div>`;
+  // Perto do final da mesma função
+  // Finaliza e insere o HTML na página
+  html += `</div></div>`; /* Adicionada a div de fechamento aqui */
   document.getElementById("tabelaClassificacao").innerHTML = html;
   
   // Atualiza a marcação da equipe favorita, se houver
