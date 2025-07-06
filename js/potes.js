@@ -172,18 +172,16 @@ function removerEquipe(pote, equipeCodificada) {
 
 
 
+// No arquivo: Meu Torneio/js/potes.js
+
 function exibirEquipesExistentes(pote) {
   const lista = document.getElementById("lista-equipes-existentes");
   if (!lista) return;
 
   let disponiveis;
-
-  // Lógica para diferenciar o modo de Edição do modo de Adição
   if (equipeSendoEditada) {
-    // MODO EDIÇÃO: Mostra TODAS as equipes, exceto a que está sendo editada.
     disponiveis = todasEquipes.filter(eq => eq !== equipeSendoEditada);
   } else {
-    // MODO ADIÇÃO: Mostra apenas as equipes que ainda não foram adicionadas a NENHUM pote.
     const ocupadas = Object.values(potes).flat();
     disponiveis = todasEquipes.filter(eq => !ocupadas.includes(eq));
   }
@@ -194,17 +192,14 @@ function exibirEquipesExistentes(pote) {
     lista.innerHTML = '<p style="text-align:center; color:white;">Nenhuma equipe disponível</p>';
     return;
   }
-
-  lista.innerHTML = disponiveis.map(eq => {
+  
+  // Constrói todo o HTML de uma vez antes de o atribuir ao DOM
+  const htmlDosCards = disponiveis.map(eq => {
     const escudo = getEscudoPath(eq);
     const pais = getPais(eq);
     const nomeExibicao = formatarNomeExibicao(eq);
     const idCheckbox = `check-${eq.replace(/\s+/g, '-')}`;
-
-    // Busca as três cores da equipe
     const cores = getCoresEquipe(eq);
-    
-    // CORRIGIDO: Mantém o visual listrado, mas agora com as 3 cores.
     const backgroundStyle = `background: repeating-linear-gradient(45deg, ${cores.primaria}, ${cores.primaria} 10px, ${cores.secundaria} 10px, ${cores.secundaria} 20px, ${cores.terciaria} 20px, ${cores.terciaria} 30px);`;
 
     return `
@@ -212,20 +207,21 @@ function exibirEquipesExistentes(pote) {
         <div class="equipe-card" style="${backgroundStyle}" onclick="alternarSelecaoEquipe('${eq}', this)">
           <input type="checkbox" class="checkbox-selecao" id="${idCheckbox}"
                  onchange="alternarSelecaoEquipe('${eq}', this.parentNode)">
-          
           <img 
-            src="${escudo}" 
+            src="${escudo}"
             class="escudo" 
             alt="${nomeExibicao}"
             onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png';"
           />
- 
           <div class="nome-modal">${nomeExibicao}</div>
           <div class="sigla-modal">${pais}</div>
         </div>
       </div>
     `;
   }).join('');
+
+  // Atribui a lista completa de uma só vez, o que é muito mais rápido.
+  lista.innerHTML = htmlDosCards;
 }
 
 function alternarSelecaoEquipe(equipe, elemento) {
@@ -385,38 +381,40 @@ function removerEquipe(pote, equipeCodificada) {
  * A função limpa o container e o reconstrói com os dados mais recentes
  * da variável global 'window.potes'.
  */
+// No arquivo: Meu Torneio/js/potes.js
+
+/**
+ * Renderiza todos os potes e as equipes contidas neles na tela.
+ * A função limpa o container e o reconstrói com os dados mais recentes
+ * da variável global 'window.potes'.
+ */
 function exibirPotes() {
   const container = document.querySelector('.potes-container');
   if (!container) return;
 
-  container.innerHTML = '';
+  // 1. Usa um DocumentFragment para construir os potes em memória, o que é muito mais rápido.
+  const fragment = document.createDocumentFragment();
 
   for (const pote in potes) {
     const wrapperDiv = document.createElement('div');
     wrapperDiv.className = 'pote-wrapper';
 
-    // Gera o HTML para cada equipe dentro do pote
     const equipesHTML = potes[pote].map((equipe) => {
       const escudo = getEscudoPath(equipe);
       const pais = getPais(equipe);
       const equipeCodificada = encodeURIComponent(equipe);
       
+      // Lógica de carregamento direto dos escudos, como no seu código original.
       return `
         <li class="pote-equipe-item" data-pote="${pote}" data-equipe="${equipeCodificada}">
           <img src="${escudo}" class="escudo" alt="${formatarNomeExibicao(equipe)}" onerror="this.onerror=null; this.src='images/default.png';">
-          
           <div class="info-equipe">
             <span class="nome-equipe">${formatarNomeExibicao(equipe)}</span>
             <div class="pais-equipe-card">${pais}</div>
           </div>
-          
           <div class="equipe-actions">
-              <button class="action-btn" onclick="editarEquipe('${pote}', '${equipeCodificada}')" title="Editar Equipe">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="action-btn" onclick="removerEquipe('${pote}', '${equipeCodificada}')" title="Remover Equipe">
-                <i class="fas fa-trash"></i>
-              </button>
+              <button class="action-btn" onclick="editarEquipe('${pote}', '${equipeCodificada}')" title="Editar Equipe"><i class="fas fa-edit"></i></button>
+              <button class="action-btn" onclick="removerEquipe('${pote}', '${equipeCodificada}')" title="Remover Equipe"><i class="fas fa-trash"></i></button>
           </div>
         </li>
       `;
@@ -424,23 +422,20 @@ function exibirPotes() {
 
     const vazioHTML = `<li class="pote-vazio-placeholder">Pote Vazio</li>`;
 
-    // Constrói o HTML completo com a nova estrutura de 3 colunas
     wrapperDiv.innerHTML = `
-      <div class="pote-titulo-lateral">
-        ${pote.replace('pote', 'Pote ')}
-      </div>
+      <div class="pote-titulo-lateral">${pote.replace('pote', 'Pote ')}</div>
       <div class="pote-conteudo-principal">
-        <ul>
-          ${potes[pote].length > 0 ? equipesHTML : vazioHTML}
-        </ul>
+        <ul>${potes[pote].length > 0 ? equipesHTML : vazioHTML}</ul>
       </div>
-      <button class="botao-adicionar-lateral" onclick="document.getElementById('poteSelecionado').value='${pote}'; abrirModalCadastro()">
-        Adicionar
-      </button>
+      <button class="botao-adicionar-lateral" onclick="document.getElementById('poteSelecionado').value='${pote}'; abrirModalCadastro()">Adicionar</button>
     `;
 
-    container.appendChild(wrapperDiv);
+    fragment.appendChild(wrapperDiv);
   }
+
+  // 2. Limpa o ecrã e adiciona todos os potes de uma só vez. Esta é a principal otimização.
+  container.innerHTML = '';
+  container.appendChild(fragment);
 
   const botoesGerais = document.querySelector(".botoes-tela-potes");
   if (botoesGerais) {
@@ -449,7 +444,6 @@ function exibirPotes() {
 
   atualizarFavoritosNaTela();
 }
-
 function formatarNomeExibicao(equipe) {
   return equipe ? equipe.split(' (')[0] : '';
 }
@@ -506,6 +500,8 @@ function filtrarEquipesExistentes() {
   });
 }
 
+// No arquivo: Meu Torneio/js/potes.js
+
 function preencherPotesAleatoriamente() {
     if (!verificarEAtualizarPotes()) return;
     if (Object.values(window.potes).every(p => p.length >= MAX_EQUIPES_POR_POTE)) {
@@ -514,10 +510,7 @@ function preencherPotesAleatoriamente() {
     }
 
     const equipesJaNosPotes = new Set(Object.values(window.potes).flat());
-    
-    // LINHA CORRIGIDA: Garante que a lista de onde vamos tirar as equipes é 100% única.
     const equipesDisponiveisUnicas = [...new Set(todasEquipes)].filter(e => !equipesJaNosPotes.has(e));
-
     const equipesEmbaralhadas = [...equipesDisponiveisUnicas].sort(() => Math.random() - 0.5);
 
     let indiceEquipe = 0;
@@ -526,8 +519,14 @@ function preencherPotesAleatoriamente() {
             window.potes[pote].push(equipesEmbaralhadas[indiceEquipe++]);
         }
     }
+    
+    // 1. Renderiza a tela imediatamente com a versão otimizada.
     exibirPotes();
-    salvarDadosTorneio();
+    
+    // 2. Adia a operação de salvar para não bloquear a interface, garantindo fluidez.
+    setTimeout(() => {
+        salvarDadosTorneio();
+    }, 100);
 }
 
 function verificarEAtualizarPotes() {
