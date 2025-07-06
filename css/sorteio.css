@@ -1,12 +1,16 @@
 /* Arquivo: sorteio.css */
+/* Arquivo: sorteio.css - Bloco Corrigido */
+/* Bloco Corrigido */
+
 .botoes-sorteio {
   display: flex;
+  justify-content: center; /* <-- Adicione esta linha */
   background: #4151b9;
   border-radius: 10px;
   padding: 2px;
   width: fit-content;
-  margin: 0; 
-  flex-wrap: wrap;
+  margin: 0;
+  flex-wrap: nowrap;
   gap: 2px;
 }
 
@@ -24,11 +28,18 @@
 }
 
 /* Botões internos - manter consistência */
+/* Bloco Corrigido */
+
 .botoes-sorteio button {
-  padding: 10px 20px;
+  padding: 8px 8px;
+  background: transparent;
+  border: none;
   border-radius: 10px;
-  background: rgba(255,255,255,0.1);
-  transition: all 0.3s;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap; /* <-- Adicione esta linha */
 }
 
 /* Destaque AZUL CLARO (Visualização / Filtro / Padrão) */
