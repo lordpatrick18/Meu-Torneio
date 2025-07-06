@@ -4,10 +4,12 @@
 
 /* --- Container Geral dos Potes --- */
 /* --- Container Geral dos Potes --- */
+/* Meu Torneio/css/potes.css */
 .potes-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(335px, 1fr));
-  gap: 0rem 0rem;
+  /* Adiciona espaço vertical (2.5rem) e mantém o espaço horizontal (0rem) */
+  gap: 2.5rem 0rem; 
   padding: -10rem;
   max-width: 1700px;
   margin: 0rem auto;
@@ -418,3 +420,4 @@
   max-height: 100%;
   object-fit: contain; /* Garante que a imagem caiba inteira, mantendo a proporção */
 }
+
