@@ -412,8 +412,6 @@ function carregarTorneioPorNome(tournamentName) {
   }
 
   alert(`Torneio "${tournamentName}" carregado com sucesso!`);
-
-  
 }
 
 /**
