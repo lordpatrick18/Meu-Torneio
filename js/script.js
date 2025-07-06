@@ -28,15 +28,13 @@ let classificacaoInicializada = false;
  * Aplica um tema de cores dinamicamente ao site.
  * @param {object} themeColors - Objeto com as cores a serem aplicadas.
  */
-function aplicarTema(themeColors) {
-    const root = document.documentElement;
-    if (themeColors) {
-        // Itera sobre as chaves do objeto ('--cor-fundo-app', etc.) e aplica os valores
-        for (const [key, value] of Object.entries(themeColors)) {
-            root.style.setProperty(key, value);
-        }
-    }
+function aplicarTema(themeColors = {}) {
+  const root = document.documentElement;
+  for (const variavel in themeColors) {
+    root.style.setProperty(variavel, themeColors[variavel]);
+  }
 }
+
 /**
  * Remove o tema de cores customizado, voltando ao CSS padrão.
  */
