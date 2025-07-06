@@ -376,6 +376,8 @@ function carregarTorneioPorNome(tournamentName) {
 
   // 3. Carrega o estado da interface (filtros, equipe favorita, etc.)
   window.equipeFavorita = dados.equipeFavorita || null;
+  setTimeout(() => atualizarFavoritosNaTela(), 500);
+
   window.ultimaFaseSorteio = dados.ultimaFaseSorteio || 'primeiraFase';
   window.filtroAtual = dados.filtroAtual || 'geral';
   window.faseAtiva = dados.faseAtivaJogos || 'grupo';
@@ -412,6 +414,9 @@ function carregarTorneioPorNome(tournamentName) {
   }
 
   alert(`Torneio "${tournamentName}" carregado com sucesso!`);
+
+  console.log("Equipe favorita carregada:", window.equipeFavorita);
+
 }
 
 /**
