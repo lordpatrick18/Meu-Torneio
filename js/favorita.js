@@ -90,14 +90,23 @@ function abrirSelecaoFavorita() {
 /**
  * Salva a equipe escolhida, fecha o modal e atualiza a interface.
  */
+// CÓDIGO NOVO E CORRIGIDO
 function selecionarEquipeFavorita(equipe) {
-  equipeFavorita = equipe;
+  // Define a nova equipe favorita na variável global
+  window.equipeFavorita = equipe;
+
+  // Fecha o modal de seleção
   fecharSelecaoFavorita();
+  
+  // Atualiza a interface para mostrar a nova equipe favorita destacada
   atualizarFavoritosNaTela();
 
-  // Adicione esta linha para salvar automaticamente a alteração
+  // **PASSO CRUCIAL ADICIONADO**
+  // Salva imediatamente todo o estado do torneio atual.
+  // Isso garante que a nova equipe favorita seja associada ao perfil correto.
   if (typeof salvarDadosTorneio === 'function') {
-    salvarDadosTorneio();
+    // O 'false' indica que não é um torneio novo, apenas uma atualização.
+    salvarDadosTorneio(false); 
   }
 }
 /**
