@@ -94,8 +94,12 @@ function selecionarEquipeFavorita(equipe) {
   equipeFavorita = equipe;
   fecharSelecaoFavorita();
   atualizarFavoritosNaTela();
-}
 
+  // Adicione esta linha para salvar automaticamente a alteração
+  if (typeof salvarDadosTorneio === 'function') {
+    salvarDadosTorneio();
+  }
+}
 /**
  * Aplica os efeitos visuais (gradientes, etc.) na equipe favorita em todas as telas.
  */
