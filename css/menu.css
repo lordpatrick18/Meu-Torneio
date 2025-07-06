@@ -189,6 +189,7 @@ body {
 
 /* Menu principal azul */
 /* Garante que o menu fique fixo no topo */
+/* Cole este novo código no lugar do bloco acima */
 nav {
   position: sticky;
   top: 0;
@@ -196,10 +197,20 @@ nav {
   background: linear-gradient(135deg, #0229de, #01096c);
   padding: 15px 20px;
   display: flex;
+  /* Organiza a navegação principal e os controles em coluna */
+  flex-direction: column; 
+  /* Centraliza horizontalmente os blocos */
+  align-items: center; 
+  /* Adiciona um espaço entre a navegação e os controles */
+  gap: 10px; 
+}
+
+/* Nova regra para a linha de cima da navegação */
+.nav-top-row {
+  display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  height: auto; /* Remova a altura fixa para acomodar os botões */
+  align-items: center;
+  width: 100%; /* Ocupa toda a largura disponível */
 }
 
 /* Mostra os botões apenas quando a tela de sorteio estiver ativa */
@@ -225,6 +236,12 @@ nav .menu-items a {
   text-decoration: none;
   font-weight: 500;
   position: relative;
+
+  padding: 6px 16px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
+  white-space: nowrap; /* <-- Adicione esta linha */
 }
 
 nav .menu-items a:hover,
@@ -612,4 +629,122 @@ h1, h2, h3 {
   opacity: 0; 
   
   z-index: 2; /* Fica por cima do nosso conteúdo visual para receber o clique. */
+}
+
+/* Adicione este código ao final de Meu Torneio/css/menu.css */
+
+@media (max-width: 992px) {
+  nav {
+    /* Impede que os itens quebrem para a próxima linha */
+    flex-wrap: nowrap;
+    /* Reduz os espaçamentos laterais da barra de navegação para ganhar espaço */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  nav .left-nav {
+    /* Reduz o espaço entre o logo e o menu */
+    gap: 1rem;
+  }
+
+  nav .menu-items {
+    /* Reduz o espaço entre os links "Potes", "Grupos", etc. */
+    gap: 0.5rem;
+  }
+
+  nav .menu-items a {
+    /* Reduz o espaçamento interno de cada link */
+    padding: 6px 12px;
+    font-size: 0.9rem; /* Opcional: diminui um pouco a fonte */
+  }
+
+  /* Adicione este código ao final de Meu Torneio/css/menu.css */
+
+/* Bloco Corrigido */
+
+/* Em Meu Torneio/css/menu.css, substitua QUALQUER regra para .nav-row por esta: */
+
+.nav-row {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* FORÇA a centralização do conteúdo */
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;     /* Impede que os itens quebrem a linha */
+  overflow-x: auto;      /* Adiciona rolagem horizontal em telas pequenas */
+  padding-bottom: 8px;   /* Espaço para a barra de rolagem não ficar colada */
+}
+
+/* Opcional: Estilo para a barra de rolagem, para ficar mais discreta */
+.nav-row::-webkit-scrollbar {
+  height: 4px;
+}
+.nav-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nav-row::-webkit-scrollbar-thumb {
+  background-color: #0232fe;
+  border-radius: 4px;
+}
+  .favorite-button {
+    /* Garante que o botão não encolha */
+    flex-shrink: 0;
+    /* Ajusta o padding e a fonte para o botão também */
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .champions-logo img {
+      height: 35px; /* Opcional: diminui um pouco o logo */
+  }
+}
+
+/* Ajuste para telas ainda menores, como celulares na vertical */
+@media (max-width: 768px) {
+    nav .menu-items {
+        gap: 0.2rem;
+    }
+    nav .menu-items a {
+        padding: 6px 8px;
+    }
+}
+
+/* Estilo para os seletores de cor no modal */
+.cores-picker-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.cor-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+}
+
+.cor-picker input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.cor-picker input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.cor-picker input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
 }
