@@ -562,3 +562,24 @@
       padding-right: 20px;
   }
 }
+
+/* Adicione este código ao final de Meu Torneio/css/classificacao.css */
+
+.classificacao-scroll-container {
+  width: 100%;
+  overflow-x: auto; /* A mágica acontece aqui! */
+  -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos móveis */
+}
+
+/* Bônus: Melhora a barra de rolagem para desktop */
+.classificacao-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.classificacao-scroll-container::-webkit-scrollbar-track {
+  background: #010560;
+  border-radius: 4px;
+}
+.classificacao-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #0232fe;
+  border-radius: 4px;
+}
