@@ -1,6 +1,4 @@
-/* ========================================================== */
-/* FAVORITA.CSS - VERSÃO FINAL CORRIGIDA (COM SCROLLBAR)      */
-/* ========================================================== */
+/* No ficheiro: Meu Torneio/css/favorita.css */
 
 /* --- Estilos do Modal de Seleção --- */
 .modal {
@@ -128,7 +126,6 @@
   padding: 1rem 1.5rem;
 }
 
-/* --- CÓDIGO DA BARRA DE ROLAGEM RESTAURADO --- */
 .custom-scroll-area::-webkit-scrollbar {
   width: 8px;
 }
@@ -144,9 +141,6 @@
   background: #0056e0;
 }
 
-/* =================================================== */
-/* === GARANTE 5 EQUIPES POR LINHA NO MODAL FAVORITAS === */
-/* =================================================== */
 .modal-conteudo .equipes-disponiveis-container {
   grid-template-columns: repeat(5, 1fr);
-} 
+}
