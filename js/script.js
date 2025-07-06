@@ -20,6 +20,32 @@ window.currentTournamentLogo = "images/logotype_dark.svg";
 let classificacaoInicializada = false;
 
 
+// Adicione estas duas funções no início do seu script.js
+
+/**
+ * Aplica um tema de cores dinamicamente ao site.
+/**
+ * Aplica um tema de cores dinamicamente ao site.
+ * @param {object} themeColors - Objeto com as cores a serem aplicadas.
+ */
+function aplicarTema(themeColors) {
+    const root = document.documentElement;
+    if (themeColors) {
+        // Itera sobre as chaves do objeto ('--cor-fundo-app', etc.) e aplica os valores
+        for (const [key, value] of Object.entries(themeColors)) {
+            root.style.setProperty(key, value);
+        }
+    }
+}
+/**
+ * Remove o tema de cores customizado, voltando ao CSS padrão.
+ */
+function resetarTema() {
+    const root = document.documentElement;
+    const customColorKeys = ['--cor-fundo-app', '--cor-primaria-app', '--cor-secundaria-app', '--cor-destaque-app'];
+    customColorKeys.forEach(key => root.style.removeProperty(key));
+}
+
 /**
  * Function to decode JWT token.
  *
@@ -214,8 +240,24 @@ function criarNovoTorneio() {
       return;
   }
 
+  // --- INÍCIO DAS CORREÇÕES ---
+
+  // 1. Captura as cores escolhidas no modal
+  const customColors = {
+    '--cor-fundo-app': document.getElementById('cor-fundo-app').value,
+    '--cor-primaria-app': document.getElementById('cor-primaria-app').value,
+    '--cor-secundaria-app': document.getElementById('cor-secundaria-app').value,
+    '--cor-destaque-app': document.getElementById('cor-destaque-app').value,
+  };
+
+  // 2. Aplica as novas cores na página IMEDIATAMENTE
+  aplicarTema(customColors);
+
+  // 3. Atualiza o título do torneio na tela IMEDIATAMENTE
   document.getElementById('tournament-title').textContent = nomeTorneio;
   window.currentTournamentName = nomeTorneio;
+
+  // --- FIM DAS CORREÇÕES ---
 
   const championsLogoImg = document.querySelector('.champions-logo img');
   if (championsLogoImg && imagemTorneioInput.files && imagemTorneioInput.files[0]) {
@@ -223,18 +265,17 @@ function criarNovoTorneio() {
     reader.onload = function(e) {
       championsLogoImg.src = e.target.result;
       window.currentTournamentLogo = e.target.result;
-      proceedWithNewTournamentCreation();
+      proceedWithNewTournamentCreation(customColors); // Passa as cores para salvar
     };
     reader.readAsDataURL(imagemTorneioInput.files[0]);
   } else {
     championsLogoImg.src = "images/logotype_dark.svg";
     window.currentTournamentLogo = "images/logotype_dark.svg";
-    proceedWithNewTournamentCreation();
+    proceedWithNewTournamentCreation(customColors); // Passa as cores para salvar
   }
 
-// (Dentro da função criarNovoTorneio)
-  function proceedWithNewTournamentCreation() {
-      // Limpa TODOS os dados e o ESTADO do torneio
+  function proceedWithNewTournamentCreation(colorsToSave) {
+      // Limpa os dados do torneio (potes, grupos, etc.)
       window.potes = { pote1: [], pote2: [], pote3: [], pote4: [] };
       window.dadosGrupos = {};
       window.dadosJogos = {};
@@ -245,21 +286,18 @@ function criarNovoTorneio() {
       window.resultados = {};
       window.historicoClassificacao = {};
       window.escudosCustomizados = {};
-
-      // === RESETA O ESTADO DA INTERFACE PARA O PADRÃO (NOVAS LINHAS) ===
       window.equipeFavorita = null;
       window.ultimaFaseSorteio = 'primeiraFase';
       window.filtroAtual = 'geral';
       window.faseAtiva = 'grupo';
       window.rodadaAtiva = 1;
 
-      // Salva este novo estado "limpo" como o torneio atual
-      salvarDadosTorneio(true); 
+      // Salva o novo torneio com as cores
+      salvarDadosTorneio(true, colorsToSave);
       localStorage.setItem('lastActiveTournament', window.currentTournamentName);
 
       document.getElementById('modal-torneio').classList.add('hidden');
       
-      // Mostra a tela inicial
       mostrar('potes');
       exibirPotes();
   }
@@ -303,6 +341,8 @@ function abrirListaTorneiosSalvos() {
  */
 /**
  * Carrega todos os dados E o estado da interface de um torneio específico.
+/**
+ * Carrega todos os dados e o tema de um torneio específico a partir do localStorage.
  * @param {string} tournamentName - O nome do torneio a carregar.
  */
 function carregarTorneioPorNome(tournamentName) {
@@ -315,7 +355,14 @@ function carregarTorneioPorNome(tournamentName) {
 
   const dados = JSON.parse(dadosSalvos);
 
-  // Atribui os dados carregados às variáveis globais
+  // 1. Aplica o tema de cores salvo ou reseta para o padrão
+  if (dados.themeColors) {
+    aplicarTema(dados.themeColors);
+  } else {
+    resetarTema();
+  }
+
+  // 2. Atribui os dados do torneio carregados às variáveis globais
   window.potes = dados.potes || { pote1: [], pote2: [], pote3: [], pote4: [] };
   window.dadosGrupos = dados.dadosGrupos || {};
   window.dadosJogos = dados.dadosJogos || {};
@@ -327,14 +374,14 @@ function carregarTorneioPorNome(tournamentName) {
   window.historicoClassificacao = dados.historicoClassificacao || {};
   window.escudosCustomizados = dados.escudosCustomizados || {};
 
-  // === CARREGA O ESTADO DA INTERFACE (NOVAS LINHAS) ===
+  // 3. Carrega o estado da interface (filtros, equipe favorita, etc.)
   window.equipeFavorita = dados.equipeFavorita || null;
   window.ultimaFaseSorteio = dados.ultimaFaseSorteio || 'primeiraFase';
   window.filtroAtual = dados.filtroAtual || 'geral';
-  window.faseAtiva = dados.faseAtivaJogos || 'grupo';    // Carrega o filtro de FASE de jogos
-  window.rodadaAtiva = dados.rodadaAtivaJogos || 1;      // Carrega o filtro de RODADA de jogos
+  window.faseAtiva = dados.faseAtivaJogos || 'grupo';
+  window.rodadaAtiva = dados.rodadaAtivaJogos || 1;
 
-  // Atualiza a identidade do torneio atual
+  // 4. Atualiza a identidade visual do torneio (título e logo)
   window.currentTournamentName = dados.tournamentName;
   window.currentTournamentLogo = dados.tournamentLogo;
   document.getElementById('tournament-title').textContent = window.currentTournamentName;
@@ -343,18 +390,26 @@ function carregarTorneioPorNome(tournamentName) {
     championsLogoImg.src = window.currentTournamentLogo;
   }
 
+  // 5. Define este como o último torneio ativo e fecha os modais
   localStorage.setItem('lastActiveTournament', tournamentName);
   document.getElementById('modal-lista-torneios').classList.add('hidden');
   document.getElementById('modal-torneio').classList.add('hidden');
 
-  // ATUALIZA A INTERFACE COMPLETA COM OS DADOS CARREGADOS
-  // (A ordem aqui é importante para que cada tela já carregue com seus filtros corretos)
-  mostrar('potes'); // Começa pela tela de potes
+  // 6. Atualiza todas as seções da interface com os dados carregados
+  mostrar('potes'); // Sempre começa mostrando a tela de potes
   exibirPotes();
-  filtrarSorteioPorFase(window.ultimaFaseSorteio); // Aplica o filtro de sorteio salvo
-  filtrarClassificacao(window.filtroAtual);       // Aplica o filtro de classificação salvo
-  exibirJogos();                                    // Exibe os jogos com os filtros salvos
-  atualizarFavoritosNaTela();                       // Atualiza a equipe favorita em toda a interface
+  if (typeof filtrarSorteioPorFase === 'function') {
+    filtrarSorteioPorFase(window.ultimaFaseSorteio);
+  }
+  if (typeof filtrarClassificacao === 'function') {
+    filtrarClassificacao(window.filtroAtual);
+  }
+  if (typeof exibirJogos === 'function') {
+    exibirJogos();
+  }
+  if (typeof atualizarFavoritosNaTela === 'function') {
+    atualizarFavoritosNaTela();
+  }
 
   alert(`Torneio "${tournamentName}" carregado com sucesso!`);
 }
@@ -368,7 +423,7 @@ function carregarTorneioPorNome(tournamentName) {
  * Salva o estado ATUAL do torneio, incluindo os filtros e a equipe favorita.
  * @param {boolean} isNewTournament - True se for um novo torneio.
  */
-function salvarDadosTorneio(isNewTournament = false) {
+function salvarDadosTorneio(isNewTournament = false, customColors = null) {
   if (!dadosUsuarioLogado) {
     alert("Por favor, faça login para salvar seu progresso.");
     return;
@@ -383,9 +438,11 @@ function salvarDadosTorneio(isNewTournament = false) {
 
   const logo = window.currentTournamentLogo;
 
-  // Objeto completo com todos os dados e o ESTADO ATUAL da interface
+  // Se não estiver salvando cores novas, tenta manter as cores já existentes do torneio
+  const themeToSave = customColors ? customColors : JSON.parse(localStorage.getItem(`tournament_${nome}`))?.themeColors;
+
+  // Objeto completo com todos os dados, incluindo o tema
   const dadosParaSalvar = {
-    // Dados do torneio
     potes: window.potes,
     dadosGrupos: window.dadosGrupos,
     dadosJogos: window.dadosJogos,
@@ -396,17 +453,14 @@ function salvarDadosTorneio(isNewTournament = false) {
     resultados: window.resultados,
     historicoClassificacao: window.historicoClassificacao,
     escudosCustomizados: window.escudosCustomizados,
-    
-    // Identidade do torneio
     tournamentName: nome,
     tournamentLogo: logo,
-
-    // === ESTADO DA INTERFACE (NOVAS LINHAS) ===
     equipeFavorita: window.equipeFavorita,
-    ultimaFaseSorteio: window.ultimaFaseSorteio, // Filtro da tela de Sorteio
-    filtroAtual: window.filtroAtual,             // Filtro da tela de Classificação
-    faseAtivaJogos: window.faseAtiva,            // Filtro de FASE da tela de Jogos
-    rodadaAtivaJogos: window.rodadaAtiva         // Filtro de RODADA da tela de Jogos
+    ultimaFaseSorteio: window.ultimaFaseSorteio,
+    filtroAtual: window.filtroAtual,
+    faseAtivaJogos: window.faseAtiva,
+    rodadaAtivaJogos: window.rodadaAtiva,
+    themeColors: themeToSave // <<< SALVA O TEMA JUNTO
   };
 
   localStorage.setItem(`tournament_${nome}`, JSON.stringify(dadosParaSalvar));
@@ -422,7 +476,6 @@ function salvarDadosTorneio(isNewTournament = false) {
   }
   console.log(`Dados e estado do torneio "${nome}" salvos!`);
 }
-
 /**
  * Controls the display of different sections.
  *
@@ -552,3 +605,4 @@ function getCoresEquipe(nomeEquipe) {
   
   return coresDefault;
 }
+
