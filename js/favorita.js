@@ -90,25 +90,12 @@ function abrirSelecaoFavorita() {
 /**
  * Salva a equipe escolhida, fecha o modal e atualiza a interface.
  */
-// CÓDIGO NOVO E CORRIGIDO
 function selecionarEquipeFavorita(equipe) {
-  // Define a nova equipe favorita na variável global
-  window.equipeFavorita = equipe;
-
-  // Fecha o modal de seleção
+  equipeFavorita = equipe;
   fecharSelecaoFavorita();
-  
-  // Atualiza a interface para mostrar a nova equipe favorita destacada
   atualizarFavoritosNaTela();
-
-  // **PASSO CRUCIAL ADICIONADO**
-  // Salva imediatamente todo o estado do torneio atual.
-  // Isso garante que a nova equipe favorita seja associada ao perfil correto.
-  if (typeof salvarDadosTorneio === 'function') {
-    // O 'false' indica que não é um torneio novo, apenas uma atualização.
-    salvarDadosTorneio(false); 
-  }
 }
+
 /**
  * Aplica os efeitos visuais (gradientes, etc.) na equipe favorita em todas as telas.
  */
